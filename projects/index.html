@@ -79,7 +79,15 @@
       margin-bottom: 60px;
     }
 
-    .project-list { width: 100%; max-width: 900px; }
+    /* Colonne flex plutôt qu'un bloc : sans écart, les cartes se touchent et
+       leurs deux bordures forment un trait double entre chacune. */
+    .project-list {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
 
     /* ── Project Card ── */
     .project-card {
@@ -268,9 +276,30 @@
 
     <div class="project-list">
 
-      <a class="project-card" href="standia/">
+      <a class="project-card" href="renderflow/">
         <div class="pc-top">
           <span class="pc-index">[01]</span>
+          <div class="pc-tags">
+            <span class="pc-tag">renderflow.shop</span>
+          </div>
+        </div>
+
+        <h2 class="pc-title">Renderflow <em>— Shopify Theme Store</em></h2>
+        <p class="pc-sub">Own product &nbsp;&middot;&nbsp; 2026</p>
+
+        <div class="pc-divider"></div>
+
+        <div class="pc-bottom">
+          <p class="pc-desc">
+            Shopify themes I design, build and sell myself.
+          </p>
+          <span class="pc-cta">View Project <span class="pc-cta-arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <a class="project-card" href="standia/">
+        <div class="pc-top">
+          <span class="pc-index">[02]</span>
           <div class="pc-tags">
             <span class="pc-tag" style="color:#e8a020;border-color:#e8a020;">● IN PROGRESS</span>
           </div>
@@ -291,7 +320,7 @@
 
       <a class="project-card" href="fin210/">
         <div class="pc-top">
-          <span class="pc-index">[02]</span>
+          <span class="pc-index">[03]</span>
           <div class="pc-tags">
             <span class="pc-tag">JMSB — Concordia University</span>
           </div>
@@ -307,27 +336,6 @@
             Multi-residential income property analysis.
           </p>
           <span class="pc-cta">View Project <span class="pc-cta-arrow">→</span></span>
-        </div>
-      </a>
-
-      <a class="project-card" href="renderflow/">
-        <div class="pc-top">
-          <span class="pc-index">[03]</span>
-          <div class="pc-tags">
-            <span class="pc-tag">renderflow.shop</span>
-          </div>
-        </div>
-
-        <h2 class="pc-title">Renderflow <em>&mdash; Shopify Theme Store</em></h2>
-        <p class="pc-sub">Own product &nbsp;&middot;&nbsp; 2026</p>
-
-        <div class="pc-divider"></div>
-
-        <div class="pc-bottom">
-          <p class="pc-desc">
-            Shopify themes I design, build and sell myself.
-          </p>
-          <span class="pc-cta">View Project <span class="pc-cta-arrow">&rarr;</span></span>
         </div>
       </a>
 
