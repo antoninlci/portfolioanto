@@ -66,6 +66,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.antoninleclei.com/projects/renderflow/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/renderflow/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/renderflow/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/renderflow/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.antoninleclei.com/fr/realisations/renderflow/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/renderflow/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/renderflow/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/renderflow/" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.antoninleclei.com/experiences/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/experiences/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/experiences/" />

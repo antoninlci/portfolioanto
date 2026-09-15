@@ -1,0 +1,1443 @@
+/* ══════════════════════════════════════════════════════════════════════
+   BOUTIQUE — feuille de style
+   Le site qui VEND les thèmes. Volontairement à l'opposé de Vantage :
+   fond noir, gros grotesque, accent unique. Deux raisons.
+
+   1. On ne confond pas le vendeur et le produit. Si la boutique
+      ressemblait à Vantage, les captures du thème se fondraient dans la
+      page et on ne verrait plus ce qu'on achète.
+   2. Le blanc de Vantage éclate sur ce noir. Les captures deviennent la
+      seule lumière de la page — c'est elles qu'on regarde.
+
+   Aucune police téléchargée : Helvetica pour le titrage, la mono du
+   système pour les étiquettes. Rien à charger, rien à attendre.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* Bleu de nuit. Quatre valeurs, pas une : un fond unique aplatit la
+     page — on ne distingue plus une carte de ce qui l'entoure. Chacune
+     est un cran au-dessus de la précédente, et le filet ferme la série.
+     --bg-2 est la teinte que tu as donnée, elle sert de surface ; le
+     fond général descend un cran en dessous pour qu'elle s'en détache. */
+  --bg:#0A121C;
+  --bg-2:#0D1B2A;
+  --bg-3:#132436;
+  --line:#1E3247;
+
+  /* Les gris tirent vers le bleu, eux aussi. Un gris neutre sur du bleu
+     de nuit paraît sale : l'œil compare, et il voit du jaune là où il
+     n'y en a pas. */
+  --fg:#EAF1F8;
+  --fg-dim:#93A6B8;
+  --fg-mute:#5F758B;
+
+  /* L'accent — un lavande clair, et une seule teinte pour deux rôles.
+
+     Le site a longtemps porté deux valeurs : un bleu profond (#0D00A4,
+     puis #1F12DE) pour les aplats, et ce lavande pour le texte, parce
+     qu'un bleu profond écrit en petit sur du bleu de nuit disparaît.
+     Le lavande, lui, tient les deux emplois : assez clair pour s'écrire
+     sur le fond, assez saturé pour remplir un bouton.
+
+     --acc        remplit : boutons, pastille du menu, étiquettes pleines.
+     --acc-clair  écrit et trace : petites étiquettes, coches, puces.
+                  Même valeur aujourd'hui ; les deux jetons restent
+                  séparés parce que les deux rôles, eux, le sont — le
+                  jour où l'aplat changera, le texte n'aura pas à suivre.
+     --acc-fg     le texte POSÉ sur l'aplat. */
+  --acc:#8B7CFF;
+  --acc-clair:#8B7CFF;
+  /* --acc-fg est le texte POSÉ sur l'aplat, et il doit suivre l'aplat.
+     Sur #1F12DE, un bleu profond, il fallait du presque-blanc. Sur
+     #8B7CFF, un lavande clair, le blanc tombe à 3,2 pour 1 : le libellé
+     d'un bouton de 11 px y devient illisible. Il passe donc au bleu de
+     nuit de la page, qui remonte le rapport à près de 6 pour 1.
+     C'est la règle qu'on s'est déjà prise une fois dans le menu : un
+     jeton nommé pour son USAGE se règle sur ce qu'il accompagne, il ne
+     garde pas sa valeur quand l'autre change. */
+  --acc-fg:#0A121C;
+
+  /* La couleur du voile de transition : le bleu marine de la marque, un
+     cran AU-DESSUS du fond du site et non en dessous. Un voile plus
+     sombre que la page s'y confondrait ; plus clair d'un cran, on le
+     voit passer sans qu'il ne devienne un aplat étranger.
+     Sa valeur est écrite ici en toutes lettres plutôt que reprise de
+     --bg-2 : les deux se ressemblent aujourd'hui, mais l'un est une
+     surface et l'autre un écran. Les lier ferait bouger le voile le jour
+     où l'on retouchera les cartes. */
+  --px:#0D1B2A;
+
+  /* Deux familles, et deux seulement.
+     --f porte le texte courant, --d tout le reste : les titres, mais
+     aussi les étiquettes, les boutons et les menus.
+
+     Il y avait une mono ici. Elle donnait aux petites lignes un air de
+     terminal qui n'a rien à voir avec le vêtement, et surtout elle
+     faisait entendre une troisième voix sur une page qui n'en demandait
+     que deux. Le même grotesque, en gras et en capitales, dit la même
+     chose et appartient à la marque. */
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --d:"Helvetica Neue",Helvetica,Arial,sans-serif;
+
+  --pad:clamp(18px,4.5vw,72px);
+  --gap:clamp(70px,10vw,150px);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--f);
+     font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
+     overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+
+.mono{font-family:var(--d);font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+
+/* ─── le surtitre de section ──────────────────────────────────────────
+   La petite ligne au-dessus d'un grand titre. Elle était en mono de
+   10 px : c'est la typographie des étiquettes techniques — un prix, un
+   code, un état. Elle ne convient pas ici, où la ligne est une PHRASE
+   qui annonce ce qui suit.
+   Elle prend donc le grotesque du titrage, en gras et en capitales, à un
+   quart de sa taille. Le surtitre et le titre deviennent alors deux
+   corps de la même voix, au lieu de deux voix différentes.
+   Un interlettrage très faible et non nul : en capitales, les lettres
+   d'Helvetica se touchent presque, et à cette taille ça se lit comme un
+   pâté. .02em suffit à les décoller sans qu'on voie l'écart.
+   ─────────────────────────────────────────────────────────────────── */
+.surtitre{font-family:var(--d);font-weight:700;text-transform:uppercase;
+          font-size:clamp(12.5px,1.15vw,15px);letter-spacing:.02em;
+          line-height:1.2;color:var(--acc-clair)}
+.wrap{max-width:1360px;margin:0 auto;padding:0 var(--pad)}
+
+/* ─── titrage ────────────────────────────────────────────────────────
+   Helvetica très serrée : c'est le geste de la mode, pas de la tech.
+   Le letter-spacing négatif augmente avec la taille — une seule valeur
+   pour tous les corps donnerait des titres soit lâches, soit collés. */
+h1,h2,h3{font-family:var(--d);font-weight:700;line-height:.94;
+         text-transform:uppercase}
+.t-xl{font-size:clamp(44px,8.4vw,124px);letter-spacing:-.045em}
+.t-lg{font-size:clamp(30px,5.2vw,68px);letter-spacing:-.04em}
+.t-md{font-size:clamp(20px,2.5vw,30px);letter-spacing:-.03em}
+.t-sm{font-size:15px;letter-spacing:-.01em}
+
+/* ─── barre ─── */
+/* Pas de filet sous la barre : le flou et le fond translucide la
+   détachent déjà de la page, et le trait n'ajoutait qu'un liseré bleu en
+   travers du haut de l'écran. */
+.hdr{position:sticky;top:0;z-index:50;background:rgba(10,18,28,.84);
+     backdrop-filter:blur(14px)}
+/* Pas de largeur maximale ici : le logo de la barre doit tomber au même
+   endroit que celui du menu, qui est calé sur le bord de l'écran. Avec
+   un conteneur centré, les deux se décalaient dès qu'on dépassait
+   1360 px — et le logo sautait de place à l'ouverture du menu. */
+/* Le logo est CENTRÉ, pas à gauche : la pastille du menu occupe déjà le
+   coin droit, et un logo à gauche laisserait la barre déséquilibrée d'un
+   côté. Au centre, les deux se répondent.
+   La pastille étant en position fixe, elle ne compte pas dans ce flux —
+   le centrage porte donc sur la barre entière, pas sur l'espace restant. */
+.hdr-in{display:flex;align-items:center;justify-content:center;
+        gap:20px;padding:15px var(--pad)}
+.logo{display:block}
+.logo img{display:block;height:40px;width:auto;
+          -webkit-user-drag:none;user-select:none;-webkit-user-select:none}
+@media(max-width:860px){.logo img{height:30px}}
+
+/* ─── le héros de l'accueil ───────────────────────────────────────────
+   Un plein écran, le sigle au centre, le discours dessous. La barre a
+   disparu de cette page : deux fois la même marque sur le même écran,
+   l'une chasse l'autre. Elle reste en revanche sur la page produit, où
+   rien d'autre ne la porte.
+
+   100svh et non 100vh : sur téléphone, vh compte la barre d'adresse même
+   quand elle est repliée, et le premier écran débordait toujours d'une
+   soixantaine de pixels. */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;
+      text-align:center;overflow:hidden;
+      padding:clamp(100px,13vh,140px) 0 clamp(80px,12vh,120px)}
+/* width:100% : dans une grille centrée, l'élément se réduit à son
+   contenu. Sans cette ligne, .wrap perdrait ses marges latérales et le
+   texte viendrait toucher le bord sur un petit écran. */
+.hero-in{width:100%;display:flex;flex-direction:column;align-items:center;
+         perspective:900px}
+
+/* La perspective est portée par le PARENT, l'inclinaison par le sigle :
+   c'est ce qui donne une bascule et non un simple étirement. */
+.hero-logo{width:min(560px,74vw);margin-bottom:clamp(26px,5vh,54px);
+           transform-style:preserve-3d;will-change:transform}
+/* Une image se traîne à la souris par défaut : le navigateur en fait un
+   objet déplaçable, et le sigle partait en fantôme sous le curseur — ce
+   qui, sur le mouvement de parallaxe, donnait deux logos à l'écran.
+   pointer-events:none suffirait à lui seul, mais les deux lignes
+   au-dessus disent l'intention : ce n'est pas un fichier à emporter,
+   c'est le décor de la page. */
+/* Le titre. Deux lignes, pas trois : c'est une phrase, elle doit se
+   lire d'un souffle. Et un corps plus mesuré que le .t-xl des sections —
+   sous un sigle de 560 px, un titre énorme ferait deux logos empilés. */
+.hero-h1{font-family:var(--d);font-weight:700;text-transform:uppercase;
+         font-size:clamp(27px,4.4vw,56px);letter-spacing:-.035em;
+         line-height:1.04;margin:0}
+
+/* Les deux coins bas du premier écran. En absolu et non dans le flux :
+   ils appartiennent au BORD de l'écran, pas à la pile centrée — dans le
+   flux, ils remonteraient coller au bouton dès que la fenêtre raccourcit.
+   Sous 640 px ils passent l'un sous l'autre, centrés : côte à côte, deux
+   lignes en mono de 10 px se chevauchent. */
+/* Plus près du coin que le reste de la page : ces deux mentions ne
+   suivent pas la colonne de texte, elles tiennent le cadre de l'écran.
+   D'où un retrait plus court que le --pad général. */
+.hero-bas{position:absolute;left:clamp(16px,2.4vw,40px);
+          right:clamp(16px,2.4vw,40px);bottom:clamp(14px,2.4vh,26px);
+          display:flex;gap:14px 28px;
+          justify-content:space-between;align-items:flex-end}
+.hero-note{font-family:var(--d);font-weight:700;font-size:10px;letter-spacing:.16em;
+           text-transform:uppercase;color:var(--fg-mute);line-height:1.7}
+
+/* Le badge partenaire. Un cran sous le blanc pur (opacité .88) : à pleine
+   intensité, il tirait l'œil plus que le bouton d'appel, et ce n'est pas
+   lui qu'on vient chercher. */
+.hero-badge{height:clamp(34px,4.4vw,62px);width:auto;opacity:.9;
+            -webkit-user-drag:none;user-select:none;-webkit-user-select:none}
+
+/* ─── la preuve, coin bas droit ───────────────────────────────────────
+   Une file de pastilles qui se chevauchent, puis une ligne en capitales.
+   C'est la forme que prend une preuve sociale partout sur le web, et
+   c'est justement pour ça qu'elle se lit sans qu'on ait à l'expliquer :
+   l'œil sait déjà ce que veut dire cet empilement.
+   Elle porte pour l'instant sur le produit, pas sur des clients. */
+.preuve{display:flex;align-items:center;gap:13px}
+.preuve-ronds{display:flex}
+/* Le recouvrement se fait en marge négative et non en position absolue :
+   la file garde ainsi sa vraie largeur, donc elle pousse correctement le
+   texte à sa droite et ne déborde pas du coin. */
+.preuve-ronds span{width:30px;height:30px;border-radius:50%;
+                   border:1px solid var(--line);background:var(--bg-3);
+                   display:grid;place-items:center;overflow:hidden;
+                   font-family:var(--d);font-weight:700;font-size:10.5px;letter-spacing:.04em;
+                   color:var(--fg-dim);margin-left:-9px;flex:none}
+.preuve-ronds span:first-child{margin-left:0}
+.preuve-ronds--photos span{background:var(--bg-2)}
+.preuve-ronds--photos img{width:100%;height:100%;object-fit:cover}
+
+.preuve-mot{font-family:var(--d);font-weight:700;font-size:10px;letter-spacing:.16em;
+            text-transform:uppercase;color:var(--fg-dim);line-height:1.6}
+.preuve-mot b{color:var(--fg);font-weight:600}
+
+@media(max-width:640px){
+  .preuve-ronds span{width:25px;height:25px;font-size:7.5px;margin-left:-8px}
+  .preuve-mot{font-size:9px}
+}
+@media(max-width:640px){
+  .hero-bas{flex-direction:column;align-items:center;text-align:center}
+}
+
+.hero-logo img{width:100%;height:auto;
+               -webkit-user-drag:none;user-select:none;-webkit-user-select:none;
+               pointer-events:none;
+               /* Le halo. drop-shadow et non box-shadow : le premier suit
+                  la découpe du fichier — le sigle et ses barres — quand le
+                  second n'éclairerait que le rectangle de l'image.
+                  Trois couches et non une : une seule ombre large donne un
+                  brouillard uniforme. Empilées du plus serré au plus
+                  diffus, elles font une retombée — net contre le tracé,
+                  puis de plus en plus lâche, comme une vraie lumière.
+                  Le filtre est porté par l'IMAGE et la transformation par
+                  son parent : le navigateur calcule le flou une fois et se
+                  contente de déplacer le calque. Sur le même élément, il
+                  le recalculerait à chaque image de la parallaxe. */
+               /* Pas de couche serrée : une ombre de 10 px se posait sur
+                  le tracé lui-même et mangeait ses arêtes — le sigle
+                  paraissait flou alors qu'il ne l'était pas. Le halo
+                  commence maintenant à 26 px, donc à distance du bord :
+                  la découpe reste franche, la lueur se voit quand même. */
+               filter:drop-shadow(0 0 26px rgba(255,255,255,.20))
+                      drop-shadow(0 0 70px rgba(234,241,248,.12))}
+
+/* Le nom écrit en toutes lettres, réservé au pied de page. La barre
+   porte la marque, le pied porte le nom : à l'endroit où l'on cherche
+   qui édite le site, un sigle ne suffit pas.
+   FLOW dans l'accent : sur le bleu de nuit, il faut une teinte claire,
+   sinon on lirait « RENDER » et le mot se couperait en deux. */
+.logo-mot{font-family:var(--d);font-weight:700;font-size:27px;
+          letter-spacing:-.05em;text-transform:uppercase}
+.logo-mot span{font-weight:400;color:var(--acc-clair)!important}
+
+/* ─── boutons ─── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;
+     padding:17px 30px;background:var(--acc);color:var(--acc-fg);
+     font-family:var(--d);font-weight:700;font-size:11px;letter-spacing:.16em;
+     text-transform:uppercase;
+     position:relative;overflow:hidden;width:100%;
+     /* Le texte change de couleur EN MÊME TEMPS que le fond remonte.
+        C'est ce qui manquait : le blanc montait derrière un texte resté
+        clair, et le libellé disparaissait le temps du survol. Le petit
+        retard laisse le blanc couvrir la moitié du bouton avant que la
+        lettre ne bascule — la bascule se lit, elle ne clignote pas. */
+     transition:color .22s ease .1s}
+.btn span{position:relative;z-index:1}
+.btn::before{content:"";position:absolute;inset:0;background:var(--fg);
+             transform:scaleY(0);transform-origin:bottom;
+             transition:transform .42s var(--ease)}
+.btn:hover{color:var(--bg)}
+.btn:hover::before{transform:scaleY(1);transform-origin:top}
+
+/* Sur un aplat d'accent, le bouton s'inverse : clair avec le texte dans
+   l'accent, puisqu'un bouton bleu sur un bloc bleu n'existerait pas. Au
+   survol il passe au bleu nuit, texte clair — la même bascule, dans
+   l'autre sens. */
+.btn--inv{background:var(--fg);color:var(--acc)}
+.btn--inv::before{background:var(--bg)}
+.btn--inv:hover{color:var(--fg)}
+
+.btn--fant{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn--fant::before{background:var(--bg-3)}
+.btn--auto{width:auto}
+
+.lien-s{position:relative;padding-bottom:3px;color:var(--fg-dim)}
+.lien-s::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:currentColor;transform:scaleX(0);transform-origin:right;
+  transition:transform .4s var(--ease)}
+.lien-s:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* ─── étiquette ─── */
+.tag{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;
+     border:1px solid var(--line);background:var(--bg-2);
+     font-family:var(--d);font-weight:700;font-size:10.5px;letter-spacing:.16em;
+     text-transform:uppercase;color:var(--fg-dim)}
+.tag b{color:var(--acc-clair);font-weight:600}
+
+/* ══════════ PAGE PRODUIT ══════════ */
+.pdt{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+     gap:clamp(28px,4vw,64px);padding:clamp(28px,4vw,58px) 0 var(--gap)}
+@media(max-width:980px){.pdt{grid-template-columns:1fr}}
+
+/* galerie */
+/* Le cadre prend le format des captures : elles vont de 1,915 à 2,0,
+   donc 1,94 les couvre à moins de 2 % près. En 16/9 (1,78), « cover »
+   rognait 8 % de chaque bord — soit exactement les marges de la mise en
+   page qu'on vient montrer. */
+.gal-vue{background:var(--bg-2);border:1px solid var(--line);aspect-ratio:1.94/1;
+         display:grid;place-items:center;overflow:hidden;position:relative}
+/* contain et non cover : sur une capture d'écran, ce qui est au bord
+   compte autant que ce qui est au centre — la barre, le panier, le pied
+   de page. Un recadrage, même de quelques pour cent, coupe justement ce
+   qu'on veut prouver. Les deux ou trois pour cent qui restent en marge
+   se fondent dans le fond du cadre. */
+.gal-vue img{width:100%;height:100%;object-fit:contain}
+/* contain et non cover pour la vidéo : l'enregistrement mobile est un
+   portrait étroit, un recadrage n'en montrerait qu'une bande verticale.
+   Le fond noir tient lieu de cache. */
+.gal-vue video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+
+/* ─── le coffret ──────────────────────────────────────────────────────
+   Le cadre prend un format carré : le coffret est un portrait, il ne
+   tiendrait qu'en timbre-poste dans le 1,94/1 des captures.
+   Comme pour le téléphone, un aspect-ratio plafonné en hauteur fait
+   recalculer la LARGEUR — d'où le margin-inline:auto, sans quoi le bloc
+   se rangerait à gauche de la colonne. */
+.gal-vue--boite{aspect-ratio:1/1;max-height:min(72vh,620px);
+                background:transparent;border:0;
+                margin-inline:auto;padding:clamp(18px,3vw,46px);
+                display:flex;align-items:center;justify-content:center}
+/* width:auto — l'élément fait la largeur du coffret et non celle de la
+   case, donc c'est bien le coffret qu'on centre. */
+.gal-vue--boite img{width:auto;height:100%;max-width:100%;object-fit:contain}
+
+/* La vignette du coffret : contain, sinon le recadrage d'un portrait
+   dans une case 16/10 n'en montrerait qu'une tranche du milieu. */
+.gal-mini[data-boite]{padding:6px}
+.gal-mini[data-boite] img{object-fit:contain}
+
+/* ─── le téléphone ────────────────────────────────────────────────────
+   Un cadre dessiné en CSS, pas une image : rien à charger, il suit la
+   hauteur qu'on lui donne, et il ne copie aucun appareil en particulier.
+   Un rectangle arrondi et un écran, c'est tout ce qu'il faut pour que
+   l'œil comprenne l'échelle.
+
+   Le cadre du haut passe en 4/3 quand il l'accueille : en 16/9, un
+   portrait de ratio 0,46 n'aurait fait que 180 px de large. */
+/* 9/16 pour la vue mobile, et un passage de la grille au flex.
+
+   La grille était le problème : avec place-items:center l'élément n'est
+   pas étiré, la rangée se dimensionne sur son contenu, et le height:100%
+   du téléphone n'avait plus de hauteur de référence — d'où un cadre qui
+   débordait par le haut et par le bas. En flex, le conteneur a une
+   hauteur définie (son aspect-ratio la lui donne) et le pourcentage se
+   résout.
+
+   max-height : en 9/16, une colonne de 700 px ferait un bloc de 1 250 px
+   de haut. Le plafond ramène la scène à une hauteur d'écran ; sur
+   téléphone, où la colonne est étroite, il ne s'applique jamais et le
+   9/16 vaut tel quel. */
+/* Pas de scène derrière le téléphone : le cadre du haut se réduit à
+   l'appareil lui-même. Il prend donc SON format (520/1130) et non un
+   9/16 dans lequel il aurait flotté, il perd son fond, son filet et sa
+   marge intérieure.
+
+   margin-inline:auto — avec un aspect-ratio dont la hauteur est
+   plafonnée, c'est la LARGEUR que le navigateur recalcule : le bloc ne
+   fait plus que ~320 px au lieu des 715 de la colonne, et un bloc plus
+   étroit que son conteneur se range à gauche par défaut.
+
+   overflow:visible — sinon le cadre rognerait l'ombre du téléphone au
+   ras de ses bords, ce qui la ferait ressembler à un trait. */
+.gal-vue--tel{aspect-ratio:520/1130;max-height:min(76vh,700px);
+              margin-inline:auto;background:transparent;border:0;padding:0;
+              overflow:visible;display:flex;align-items:center;
+              justify-content:center}
+
+.tel{position:relative;height:100%;width:auto;flex:none;aspect-ratio:520/1130;
+     background:#0A0E13;border-radius:clamp(18px,2.6vw,34px);
+     padding:1.6%;
+     /* Ombre SANS décalage vertical. Portée vers le bas, elle ajoutait
+        de la masse sous le téléphone : géométriquement centré, il
+        paraissait alors posé trop haut. Une ombre à plat le laisse au
+        milieu de son cadre. */
+     box-shadow:0 0 0 1px #2A3644,
+                0 0 46px rgba(0,0,0,.55),
+                inset 0 0 0 1px rgba(255,255,255,.05)}
+.tel-ecran{position:relative;width:100%;height:100%;overflow:hidden;
+           border-radius:clamp(13px,2vw,26px);background:#000}
+/* cover et non contain : la vidéo a exactement le format de l'écran,
+   elle le remplit sans être rognée. */
+.tel-ecran video{width:100%;height:100%;object-fit:cover;display:block}
+.gal-vue em{font-family:var(--d);font-weight:700;font-size:10px;letter-spacing:.16em;
+            text-transform:uppercase;color:#2C4257;font-style:normal;
+            text-align:center;padding:0 30px;line-height:2}
+.gal-liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));
+           gap:8px;margin-top:8px}
+.gal-mini{background:var(--bg-2);border:1px solid var(--line);aspect-ratio:16/10;
+          overflow:hidden;position:relative;cursor:pointer;transition:border-color .2s}
+.gal-mini:hover,.gal-mini[aria-current="true"]{border-color:var(--fg-mute)}
+/* La vignette, elle, garde « cover » : à 96 px de large, un contain
+   laisserait plus de vide que d'image. On y reconnaît un écran, on ne
+   l'y lit pas. */
+.gal-mini img{width:100%;height:100%;object-fit:cover}
+/* La pastille de lecture : une vignette qui ouvre une vidéo doit se
+   distinguer d'une vignette qui ouvre une image, avant le clic. */
+.gal-mini[data-video]::after{content:"";position:absolute;top:50%;left:50%;
+     width:0;height:0;transform:translate(-40%,-50%);
+     border-left:11px solid rgba(255,255,255,.92);
+     border-top:7px solid transparent;border-bottom:7px solid transparent;
+     filter:drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+.gal-mini span{position:absolute;inset:auto 0 0 0;padding:5px 6px;
+               font-family:var(--d);font-weight:700;font-size:10.5px;letter-spacing:.1em;
+               text-transform:uppercase;color:var(--fg-dim);
+               background:linear-gradient(transparent,rgba(6,12,20,.88))}
+
+/* colonne d'achat */
+.buy{display:grid;gap:20px;align-content:start;position:sticky;top:88px}
+@media(max-width:980px){.buy{position:static}}
+.buy h1{margin-top:14px}
+.prix{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.prix .now{font-family:var(--d);font-size:34px;font-weight:700;letter-spacing:-.04em;
+           font-variant-numeric:tabular-nums}
+.prix .old{color:var(--fg-mute);text-decoration:line-through;font-size:15px}
+/* La note de prix. PAS de barré : un prix rayé se lit universellement
+   « c'était ça avant », et c'est même la définition du champ
+   compare_at_price chez Shopify. Ici on annonce l'inverse — une hausse à
+   venir — donc du texte, pas une rature. */
+.prix-note{font-family:var(--d);font-weight:700;font-size:10px;
+           letter-spacing:.14em;text-transform:uppercase;color:var(--acc-clair)}
+.prix .off{color:var(--acc-clair);font-family:var(--d);font-weight:700;font-size:11px;letter-spacing:.12em}
+
+.bonus{display:flex;gap:14px;align-items:flex-start;
+       border:1px solid var(--line);background:var(--bg-2);padding:16px}
+/* Le visuel du guide est détouré : ni fond ni filet, il se pose sur la
+   carte. Un cadre autour d'un objet déjà découpé remettrait la boîte dont
+   on vient de le sortir.
+   Un peu plus grand que la case d'origine : un livret est un portrait,
+   dans un carré de 64 px il ne faisait plus que 43 px de large. */
+.bonus-vue{width:82px;aspect-ratio:1;flex:none;
+           display:flex;align-items:center;justify-content:center}
+.bonus-vue img{width:100%;height:100%;object-fit:contain;
+               -webkit-user-drag:none;user-select:none}
+.bonus b{color:var(--acc-clair);display:block;font-family:var(--d);font-weight:700;font-size:10.5px;
+         letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.bonus p{font-size:12.5px;color:var(--fg-dim);line-height:1.5}
+
+.garantie{border:1px solid var(--line);background:var(--bg-2);padding:16px;
+          font-size:12.5px;color:var(--fg-dim);line-height:1.55}
+.garantie b{color:var(--fg)}
+
+.checks{display:grid;gap:11px}
+.check{display:flex;gap:11px;align-items:flex-start;font-size:13.5px}
+.check svg{width:13px;flex:none;margin-top:4px;color:var(--acc-clair)}
+
+/* accordéons */
+.acc{border-top:1px solid var(--line)}
+.acc-i{border-bottom:1px solid var(--line)}
+.acc-b{width:100%;display:flex;justify-content:space-between;align-items:center;
+       gap:18px;padding:17px 0;text-align:left;
+       font-family:var(--d);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.acc-b i{font-style:normal;font-size:15px;color:var(--fg-mute);
+         transition:transform .35s var(--ease)}
+.acc-i.on .acc-b i{transform:rotate(45deg)}
+.acc-p{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease)}
+.acc-i.on .acc-p{grid-template-rows:1fr}
+.acc-p>div{overflow:hidden}
+.acc-p .in{padding-bottom:20px;color:var(--fg-dim);font-size:13.5px}
+.acc-p .in p+p{margin-top:11px}
+.acc-p .in ul{margin-top:9px;display:grid;gap:6px}
+.acc-p .in li{list-style:none;padding-left:15px;position:relative}
+.acc-p .in li::before{content:"";position:absolute;left:0;top:.75em;
+                      width:6px;height:1px;background:var(--fg-mute)}
+
+/* ══════════ SECTIONS ══════════ */
+section{padding:var(--gap) 0}
+.sec-t{text-align:center;margin-bottom:clamp(34px,5vw,64px)}
+.sec-t .surtitre{margin-bottom:16px}
+.sec-t p.sous{color:var(--fg-dim);max-width:56ch;margin:18px auto 0}
+
+/* étapes ───────────────────────────────────────────────────────────────
+   Une frise : trois ronds numérotés, reliés par un trait horizontal qui
+   court de l'un à l'autre. Le trait ne passe pas DERRIÈRE les ronds, il
+   s'arrête à leur bord — c'est ce qui en fait une chaîne et non une
+   ligne sur laquelle on aurait posé trois pastilles.
+
+   Chaque segment est tiré par la colonne de DROITE, vers la gauche :
+   il part du bord gauche de son rond et remonte jusqu'au bord droit du
+   précédent. Une seule ligne étirée d'un bout à l'autre aurait dû être
+   masquée sous chaque rond, donc leur donner un fond opaque — et ce
+   fond serait faux dès qu'une section change de couleur.
+
+   Grille FIXE à trois colonnes : avec un nombre de colonnes qui varie,
+   le segment du premier élément d'une deuxième rangée partirait vers
+   la gauche dans le vide. Trois, ou une seule en pile.
+   ─────────────────────────────────────────────────────────────────── */
+.pas{--g:clamp(20px,2.8vw,44px);
+     display:grid;grid-template-columns:repeat(3,1fr);gap:var(--g);
+     position:relative}
+.pa{text-align:center;position:relative}
+
+/* 26px = le rayon du rond : le trait tombe donc exactement sur son axe. */
+.pa:not(:first-child)::before{content:"";position:absolute;top:26px;height:1px;
+     background:var(--line);
+     right:calc(50% + 26px);
+     left:calc(-1 * var(--g) - 50% + 26px)}
+
+.pa-n{width:52px;height:52px;border:1px solid var(--acc-clair);color:var(--acc-clair);
+      border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;
+      font-family:var(--d);font-weight:700;font-size:13px;letter-spacing:.08em}
+.pa h3{margin-bottom:11px}
+.pa p{color:var(--fg-dim);font-size:13.5px;max-width:34ch;margin:0 auto}
+
+@media(max-width:820px){
+  /* En pile, il n'y a plus rien à relier horizontalement. */
+  .pas{grid-template-columns:1fr;gap:clamp(30px,6vw,44px)}
+  .pa:not(:first-child)::before{display:none}
+}
+
+/* cartes de fonctionnalités */
+.cartes{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));
+        gap:clamp(14px,1.6vw,22px)}
+.carte{border:1px solid var(--line);background:var(--bg-2);overflow:hidden;
+       display:flex;flex-direction:column}
+.carte-vue{aspect-ratio:4/3;background:var(--bg-3);display:grid;place-items:center;
+           overflow:hidden;border-bottom:1px solid var(--line)}
+.carte-vue img{width:100%;height:100%;object-fit:cover}
+/* La carte qui porte un coffret : image entière, jamais recadrée. Un
+   « cover » couperait le haut et le bas de la boîte. */
+.carte-vue--boite{background:transparent;border-bottom:0;
+                  padding:clamp(14px,2vw,30px);
+                  display:flex;align-items:center;justify-content:center}
+.carte-vue--boite img{width:auto;height:100%;max-width:100%;object-fit:contain}
+/* Et pas d'agrandissement au survol sur celle-là : la boîte remplit déjà
+   sa case en hauteur, l'agrandir de 4 % lui couperait la tête et les
+   pieds. Le filet qui s'éclaire suffit à dire que la carte s'ouvre. */
+.carte--lien:hover .carte-vue--boite img{transform:none}
+.carte-vue em{font-family:var(--d);font-weight:700;font-size:10px;letter-spacing:.14em;
+              text-transform:uppercase;color:#2C4257;font-style:normal;
+              text-align:center;padding:0 20px;line-height:2}
+.carte-txt{padding:20px}
+.carte h3{margin-bottom:9px}
+.carte p{color:var(--fg-dim);font-size:13px}
+
+/* ══════════════════════════════════════════════════════════════════════
+   LES TROIS COLONNES DE L'ACCUEIL
+
+   Trois places côte à côte, séparées par un filet vertical. Une seule
+   est remplie ; les deux autres portent leur numéro et le mot
+   « incoming ». Une grille à trois colonnes dont deux sont vides en dit
+   plus long qu'un thème seul au centre de la page : elle montre la
+   forme de ce qui vient.
+   ══════════════════════════════════════════════════════════════════════ */
+.edis-tete{margin-bottom:clamp(38px,5vw,64px)}
+
+.edis-grille{display:grid;grid-template-columns:repeat(3,1fr)}
+
+/* Le filet est porté par la colonne, pas par un gap : une bordure
+   gauche suit la hauteur réelle de la rangée, un séparateur dessiné
+   dans l'écart aurait fallu lui donner une hauteur à la main. */
+.edi{padding:0 clamp(16px,2.2vw,34px);border-left:1px solid var(--line);
+     display:flex;flex-direction:column}
+.edi:first-child{padding-left:0;border-left:0}
+.edi:last-child{padding-right:0}
+
+.edi-haut{display:flex;align-items:center;justify-content:space-between;
+          gap:12px;padding-bottom:18px;margin-bottom:26px;
+          border-top:1px solid var(--line);padding-top:18px}
+/* Seule la colonne ouverte a son filet haut allumé : c'est lui qui dit,
+   avant même qu'on lise, laquelle des trois est achetable. */
+.edi--ouvert .edi-haut{border-top-color:var(--fg)}
+
+/* Le numéro en contour et non plein : il donne son rang à la colonne
+   sans venir peser autant que le nom du thème juste dessous. */
+.edi-n{font-family:var(--d);font-weight:700;font-size:clamp(28px,3.4vw,44px);
+       letter-spacing:-.03em;line-height:1;color:transparent;
+       -webkit-text-stroke:1.2px var(--fg-mute)}
+.edi--ouvert .edi-n{-webkit-text-stroke-color:var(--fg-dim)}
+
+.edi-etat{font-family:var(--d);font-weight:700;font-size:10px;letter-spacing:.14em;
+          text-transform:uppercase;white-space:nowrap;
+          background:var(--acc);color:var(--acc-fg);padding:6px 10px}
+.edi-etat--mute{background:transparent;color:var(--fg-mute);
+                border:1px solid var(--line)}
+
+/* 4/5 : le format d'un coffret debout. Le rendu est détouré, donc le
+   cadre reprend la surface habituelle des cartes — le coffret y flotte,
+   il n'y a plus de rectangle noir posé sur le bleu.
+   Une marge intérieure, sinon la boîte touche les quatre bords : elle
+   paraît alors coincée dans la case au lieu d'y être posée. */
+/* flex plutôt que grid, et une image qui prend sa largeur naturelle.
+   En grille, l'image occupait toute la case (width:100%) et c'est
+   object-fit qui la réduisait à l'intérieur — le contenu se centrait
+   alors dans une boîte, pas dans la case, et le coffret se retrouvait
+   décalé. Ici l'élément fait exactement la largeur du coffret, donc le
+   centrage porte sur ce qu'on voit. */
+/* Ni fond ni filet : le coffret est détouré, il se pose directement sur
+   la page. Une surface derrière lui remettrait la boîte grise dont on
+   vient de le sortir. Seules les cases vides gardent leur cadre — c'est
+   lui qui dit qu'il y a une place à prendre. */
+.edi-vue{display:flex;align-items:center;justify-content:center;
+         aspect-ratio:4/5;background:transparent;border:0;
+         padding:clamp(12px,1.8vw,26px);
+         overflow:hidden;margin-bottom:24px}
+.edi-vue img{width:auto;height:100%;max-width:100%;object-fit:contain;
+             transition:transform .7s var(--ease)}
+.edi-vue em{font-family:var(--d);font-weight:700;font-size:10px;letter-spacing:.14em;
+            text-transform:uppercase;color:#2C4257;font-style:normal;
+            text-align:center;padding:0 18px;line-height:2}
+a.edi-vue{transition:border-color .4s var(--ease)}
+a.edi-vue:hover{border-color:var(--fg-mute)}
+a.edi-vue:hover img{transform:scale(1.04)}
+.edi-vue--vide{background:transparent;border:1px dashed var(--line)}
+
+.edi-titre{font-family:var(--d);font-weight:700;text-transform:uppercase;
+           font-size:clamp(20px,2.3vw,28px);letter-spacing:-.03em;line-height:1}
+.edi-titre--mute{color:var(--fg-mute)}
+.edi-prix{margin-top:12px}
+.edi-prix .now{font-size:26px}
+
+.edi-desc{color:var(--fg-dim);font-size:13.5px;margin-top:14px}
+
+.edi-lab{font-family:var(--d);font-weight:700;font-size:10.5px;letter-spacing:.16em;
+         text-transform:uppercase;color:var(--acc-clair);
+         border-top:1px solid var(--line);padding-top:20px;margin-top:24px}
+
+.edi-liste{list-style:none;margin-top:14px;display:grid;gap:9px}
+.edi-liste li{position:relative;padding-left:20px;
+              color:var(--fg-dim);font-size:13px;line-height:1.5}
+.edi-liste li::before{content:"—";position:absolute;left:0;
+                      color:var(--acc-clair)}
+
+/* margin-top:auto colle le lien au bas de la colonne : sans lui, il
+   remonterait sous la dernière puce et les trois colonnes finiraient à
+   trois hauteurs différentes. */
+.edi-lien{margin-top:auto;padding-top:28px;display:inline-flex;
+          align-items:center;gap:8px;align-self:flex-start;
+          font-family:var(--d);font-weight:700;font-size:10.5px;letter-spacing:.16em;
+          text-transform:uppercase;color:var(--fg);
+          transition:color .3s ease}
+.edi-lien span{transition:transform .35s var(--ease)}
+.edi-lien:hover{color:var(--acc-clair)}
+.edi-lien:hover span{transform:translate(3px,-3px)}
+
+@media(max-width:900px){
+  .edis-grille{grid-template-columns:1fr}
+  /* En pile, le filet passe du côté au sommet : à une colonne, une
+     bordure gauche ne sépare plus rien. */
+  .edi{padding:0 0 clamp(30px,5vw,44px);border-left:0;
+       margin-bottom:clamp(30px,5vw,44px)}
+  .edi:last-child{margin-bottom:0;padding-bottom:0}
+  .edi-vue{aspect-ratio:16/10}
+}
+
+/* ─── la page collection ──────────────────────────────────────────────
+   La barre n'est plus collée au titre : sans ce dégagement, « Themes »
+   commençait sous la pastille du menu. */
+.coll{padding-top:clamp(96px,13vh,150px)}
+
+/* Deux colonnes maximum. À 268 px de large, un thème se réduit à une
+   vignette : on ne voit plus ce qu'on achète. La capture doit rester
+   assez grande pour qu'on y lise une mise en page. */
+.cartes--themes{grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr))}
+
+.carte-tete{display:flex;align-items:center;justify-content:space-between;
+            gap:14px;margin-bottom:10px}
+.carte-tete h3{margin:0}
+.carte-pied{display:flex;align-items:flex-end;justify-content:space-between;
+            gap:16px;flex-wrap:wrap;margin-top:20px}
+
+/* L'étiquette d'état. Un mot, pas une phrase : on doit savoir en un
+   coup d'œil ce qui est achetable et ce qui ne l'est pas encore. */
+.etiq{font-family:var(--d);font-weight:700;font-size:10px;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--acc-clair);
+      border:1px solid var(--line);padding:5px 9px;white-space:nowrap}
+.etiq--mute{color:var(--fg-mute)}
+
+/* Une carte cliquable doit se signaler comme telle AVANT le clic : le
+   filet s'éclaire et la capture avance d'un cheveu. Le survol ne porte
+   que sur ces deux propriétés — un déplacement de la carte entière
+   ferait sauter la grille. */
+.carte--lien{transition:border-color .4s var(--ease),background-color .4s var(--ease)}
+.carte--lien .carte-vue img{transition:transform .7s var(--ease)}
+.carte--lien:hover{border-color:var(--fg-mute);background:var(--bg-3)}
+.carte--lien:hover .carte-vue img{transform:scale(1.04)}
+
+/* La carte muette, elle, ne réagit pas : rien à ouvrir. Le pointillé le
+   dit sans qu'on ait à l'écrire. */
+.carte--vide{border-style:dashed;background:transparent}
+.carte--vide .carte-vue{background:var(--bg-2);border-bottom-style:dashed}
+
+/* avis — état vide honnête */
+.avis-vide{border:1px dashed var(--line);padding:clamp(32px,5vw,60px);
+           text-align:center;color:var(--fg-mute);max-width:660px;margin:0 auto}
+.avis-vide p{font-size:13.5px;margin-top:12px}
+
+/* ─── pied ─── */
+.pied{border-top:1px solid var(--line);padding:clamp(46px,6vw,76px) 0 0}
+.pied-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+           gap:clamp(28px,4vw,60px)}
+.pied h4{font-family:var(--d);font-weight:700;font-size:14px;letter-spacing:-.01em;
+         text-transform:uppercase;margin-bottom:16px}
+.pied li{list-style:none;margin-bottom:9px}
+.pied a{color:var(--fg-mute)}
+.pied a:hover{color:var(--fg)}
+/* Le bloc de marque ferme la rangée, à droite. Sa colonne se justifie
+   à la fin : sans ça, le nom et la baseline se calaient à gauche de leur
+   case et un vide s'ouvrait entre eux et le bord de la page — le pied
+   paraissait alors coupé net. */
+.pied-marque{justify-self:end;text-align:right}
+.pied-marque .logo-mot{margin-bottom:12px}
+.pied-marque p{color:var(--fg-mute);font-size:13px;max-width:30ch;margin-left:auto}
+.pied-marque .socios{justify-content:flex-end}
+
+@media(max-width:820px){
+  /* En pile, tout revient à gauche : un bloc aligné à droite au milieu
+     d'une colonne alignée à gauche se lit comme une erreur. */
+  .pied-marque{justify-self:start;text-align:left}
+  .pied-marque p{margin-left:0}
+  .pied-marque .socios{justify-content:flex-start}
+}
+.socios{display:flex;gap:14px;margin-top:18px}
+.socios a{color:var(--fg-mute)}
+.socios a:hover{color:var(--fg)}
+.socios svg{width:17px;height:17px}
+.pied-bas{border-top:1px solid var(--line);margin-top:clamp(38px,5vw,60px);
+          padding:30px 0 38px;text-align:center;color:var(--fg-mute)}
+
+/* ─── les moyens de paiement ──────────────────────────────────────────
+   Des pastilles à bords arrondis, alignées au centre, comme sur les
+   pages de règlement qu'un acheteur a déjà vues cent fois. C'est la
+   FORME qui rassure ici, avant même qu'on lise ce qu'il y a dedans.
+
+   ⚠️ Ce sont des noms écrits, pas les logos. Visa, Mastercard, PayPal
+   et les autres ont chacun leur marque déposée et leur charte : leurs
+   pastilles officielles se téléchargent chez eux, elles ne se redessinent
+   pas. Le jour où tu les auras, dépose-les dans img/paiement/ et
+   remplace chaque <span> par une <img> — la rangée est déjà à leur
+   format. */
+.paie{display:flex;justify-content:center;align-items:center;
+      gap:9px;flex-wrap:wrap;margin:22px 0 20px}
+.paie span,.paie img{width:46px;height:31px;border-radius:6px;flex:none}
+.paie span{background:var(--bg-3);border:1px solid var(--line);
+           display:grid;place-items:center;
+           font-family:var(--d);font-weight:700;font-size:8px;
+           letter-spacing:.04em;color:var(--fg-dim)}
+.paie img{object-fit:contain;background:#fff;padding:2px}
+
+/* Le copyright sur deux lignes, comme la référence : la mention légale
+   et la marque ne se lisent pas d'un même souffle. */
+.pied-copy{font-family:var(--d);font-weight:700;text-transform:uppercase;
+           font-size:10px;letter-spacing:.14em;line-height:2;color:var(--fg-mute)}
+.avert{font-size:11px;line-height:1.7;max-width:64ch;margin:0 auto;color:#3C536A}
+
+/* ─── révélations ─── */
+.rv{opacity:0;transform:translateY(16px);
+    transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   MENU RIDEAU — d'après « Curved Menu » (files 8)
+
+   Le panneau entre par la droite ; son bord gauche est un tracé SVG qui
+   se bombe vers l'intérieur au repos et se redresse à l'ouverture. C'est
+   ce seul bord courbe qui donne son poids au geste : le panneau ne
+   glisse pas, il se déplie.
+
+   Une règle, la même que pour le voile : le CSS pose les états, GSAP les
+   anime. Aucune transition CSS sur transform ici — deux moteurs sur la
+   même propriété, c'est la saccade assurée.
+
+   Le tracé vit dans un viewBox de 100 × 1000 étiré sans contrainte de
+   proportion (preserveAspectRatio="none") : la courbe suit la hauteur de
+   la fenêtre toute seule, sans une ligne de JavaScript au redimension-
+   nement. Le fichier d'origine recalculait le « d » sur innerHeight à
+   chaque resize ; c'est le même dessin, en moins fragile.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ─── la pastille ─── */
+.mbtn{position:fixed;top:16px;right:var(--pad);z-index:160;
+      width:68px;height:68px;border-radius:50%;background:var(--acc);
+      display:flex;align-items:center;justify-content:center;
+      transition:transform .45s var(--ease)}
+.mbtn:hover{transform:scale(1.07)}
+/* Ouvert, le rond se fait petit : le menu occupe déjà l'écran, le bouton
+   n'a plus à s'imposer — il doit juste rester à portée de clic. Il
+   reprend du volume sous le curseur, le même geste dans les deux états. */
+.mbtn.on{transform:scale(.86)}
+.mbtn.on:hover{transform:scale(.96)}
+@media(max-width:860px){.mbtn{top:10px;width:56px;height:56px}}
+
+/* Fermé, le bouton dit ce qu'il fait : « Menu ». Deux traits ne disent
+   rien à qui ne connaît pas la convention, et sur une pastille de 68 px
+   il y a la place d'écrire le mot.
+   Ouvert, le mot cède la place à la croix — là, l'icône suffit : elle ne
+   nomme plus une destination, elle annule un geste en cours.
+   Les deux sont superposés au centre et se croisent en fondu, si bien
+   que la pastille ne change jamais de taille. */
+.mbtn-mot,.mbtn-x{position:absolute;top:50%;left:50%;
+     transform:translate(-50%,-50%);pointer-events:none;
+     transition:opacity .28s ease}
+.mbtn-mot{font-family:var(--d);font-weight:700;font-size:10.5px;
+     letter-spacing:.16em;text-transform:uppercase;color:var(--acc-fg);
+     line-height:1}
+.mbtn.on .mbtn-mot{opacity:0}
+
+.mbtn-x{width:30px;height:30px;opacity:0}
+.mbtn.on .mbtn-x{opacity:1}
+/* Les deux traits partent à plat, l'un sur l'autre : ils tournent en
+   même temps qu'ils apparaissent, la croix se dessine au lieu de
+   surgir. */
+.mbtn-x::before,.mbtn-x::after{content:"";position:absolute;top:50%;left:50%;
+     width:19px;height:1.5px;background:var(--acc-fg);
+     transform:translate(-50%,-50%);transition:transform .35s var(--ease)}
+.mbtn.on .mbtn-x::after {transform:translate(-50%,-50%) rotate(45deg)}
+.mbtn.on .mbtn-x::before{transform:translate(-50%,-50%) rotate(-45deg)}
+
+/* ─── le panneau ───
+   Clair sur une page sombre. C'est l'inverse du site, et c'est voulu :
+   le menu se lit alors comme un autre plan, pas comme une section de
+   plus. La position fermée est posée en CSS autant qu'en JS — sans elle
+   le panneau serait visible le temps que GSAP se charge. */
+.menu{position:fixed;top:0;right:0;z-index:150;
+      width:min(520px,100vw);height:100vh;height:100dvh;
+      background:var(--fg);color:var(--bg);
+      visibility:hidden;transform:translateX(calc(100% + 100px))}
+.menu.on{visibility:visible}
+
+.menu-in{height:100%;display:flex;flex-direction:column;
+         justify-content:space-between;
+         padding:clamp(96px,13vh,132px) clamp(34px,4.2vw,58px)
+                 clamp(30px,4vw,48px)}
+
+/* ─── les liens ─── */
+.menu-nav{display:flex;flex-direction:column;gap:clamp(2px,.7vh,9px)}
+/* Le filet seul, sans étiquette. Il ne nomme plus rien — il ouvre la
+   liste, et c'est déjà tout ce qu'on lui demandait. La hauteur qu'avait
+   le mot est reprise en marge haute pour que le trait reste où il
+   était : c'est lui le repère, il n'avait pas à remonter. */
+.menu-tt{border-bottom:1px solid rgba(10,18,28,.2);
+         margin:23px 0 34px}
+
+.menu-l{position:relative;display:flex;align-items:center}
+.menu-l a{display:block;font-family:var(--d);font-weight:700;
+          text-transform:uppercase;font-size:clamp(38px,5.4vw,64px);
+          letter-spacing:-.045em;line-height:1.12;
+          transition:opacity .3s ease}
+.menu-l:hover a{opacity:.55}
+
+/* La pastille du lien : à zéro au repos. GSAP la fait grandir sous le
+   curseur et sur le lien de la page courante — c'est elle qui dit où
+   l'on se trouve, le menu n'a donc pas besoin d'un état « actif ». */
+.menu-dot{position:absolute;left:-26px;width:9px;height:9px;border-radius:50%;
+          background:var(--acc);transform:scale(0)}
+
+/* ─── le pied du panneau ─── */
+.menu-pied{display:flex;flex-wrap:wrap;gap:10px 26px;
+           font-family:var(--d);font-weight:700;font-size:10px;letter-spacing:.16em;
+           text-transform:uppercase;color:rgba(10,18,28,.55)}
+
+/* Les trois liens ne remplissent que 368 px des 404 du panneau : posés
+   à gauche, ils laissaient tout le mou du même côté, et la barre
+   paraissait décalée sous un RENDERFLOW qui, lui, touche les deux
+   bords. On répartit le mou entre eux — Instagram s'aligne sur le R,
+   l'adresse mail sur le W.
+   Le seuil : sous 440 px de fenêtre la barre passe à deux lignes, et
+   space-between écarterait alors Instagram et TikTok aux deux bouts
+   d'une ligne à moitié vide. En dessous, on garde l'alignement à
+   gauche, qui se replie proprement. */
+@media (min-width:440px){
+  .menu-pied{justify-content:space-between;gap:10px 18px}
+}
+.menu-pied a{transition:color .3s ease}
+.menu-pied a:hover{color:var(--acc)}
+
+/* Le nom, au-dessus des réseaux. .menu-in répartit ses enfants en
+   space-between : le nom et la barre des réseaux doivent donc voyager
+   ENSEMBLE dans un seul bloc, sinon le nom part se coller au milieu du
+   panneau et la répartition du panneau change de sens.
+   Aucune couleur à poser : RENDER hérite du color:var(--bg) du panneau
+   clair, FLOW garde le violet que .logo-mot span lui impose. */
+.menu-bas{display:flex;flex-direction:column;gap:clamp(16px,2.2vh,24px)}
+
+/* Le nom occupe TOUTE la largeur utile du panneau — du I d'Instagram au
+   m de mail, la barre juste en dessous lui sert de repère. Aucune taille
+   n'est écrite ici : la police est Helvetica ou Arial selon la machine,
+   deux métriques différentes, et un chiffre en dur laisserait un trou
+   d'un côté ou déborderait de l'autre. site.js la calcule. */
+.menu-mot{display:block;white-space:nowrap;line-height:.82;font-size:26px}
+
+/* ─── le bord courbe ───
+   100 px de large, posé juste à gauche du panneau. Le point de contrôle
+   du tracé sort jusqu'à x = -100 dans le viewBox, mais la courbe, elle,
+   ne dépasse pas x = 0 : rien n'est coupé. */
+.menu-courbe{position:absolute;top:0;left:-99px;width:100px;height:100%;
+             fill:var(--fg);stroke:none}
+
+/* Sur téléphone le panneau prend tout l'écran : la courbe tomberait
+   hors cadre, autant ne pas la dessiner. */
+@media(max-width:640px){
+  .menu-courbe{display:none}
+  .menu-l a{font-size:clamp(34px,11vw,52px)}
+  .menu-dot{left:-18px;width:7px;height:7px}
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   TRANSITION PIXEL — démonstration 2 de Codrops
+
+   Le style du voile est celui du dépôt : une grille, des cases pleines,
+   et rien d'autre. Toute l'animation est faite par GSAP dans px.js —
+   aucune transition CSS ici, sans quoi les deux se disputeraient les
+   mêmes propriétés et le mouvement bégaierait.
+
+   La grille est en 9 × 17, comme dans la démonstration. Les cases sont
+   donc des rectangles et non des carrés : c'est voulu, elles suivent le
+   format de l'écran.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.px{position:fixed;inset:0;z-index:200;pointer-events:none;
+    display:grid;grid-template-columns:repeat(var(--columns,17),1fr);
+    opacity:0;visibility:hidden}
+/* .vu ouvre la porte : GSAP règle l'opacité, mais un élément resté en
+   visibility:hidden ne se verrait pas pour autant. */
+.px.vu{visibility:visible}
+.px div{background:var(--px)}
+
+/* La page d'arrivée est couverte AVANT le premier rendu : sans cette
+   règle, on la verrait une fraction de seconde avant que GSAP ne pose
+   les cases. */
+html.px-entree .px{opacity:1;visibility:visible;background:var(--px)}
+html.px-entree .px.vu{background:transparent}
+
+@media(prefers-reduced-motion:reduce){ .px{display:none} }
+
+/* ══════════════════════════════════════════════════════════════════════
+   LE PANIER
+
+   Un tiroir qui glisse par-dessus la page, et rien d'autre. Ajouter au
+   panier n'est pas une décision d'achat : celui qui vient d'ajouter un
+   article veut souvent en regarder un autre, et l'envoyer sur une page
+   de panier le sort de ce qu'il faisait.
+
+   Le tiroir est en position fixe et translaté hors champ au repos. Ni
+   display:none ni visibility au départ — il doit pouvoir GLISSER, donc
+   exister et occuper sa place dès le chargement. C'est la transition sur
+   transform qui le fait entrer, et transform ne coûte rien au navigateur.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.tiroir-voile{position:fixed;inset:0;z-index:170;background:rgba(4,8,14,.62);
+              opacity:0;transition:opacity .45s var(--ease);
+              -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.tiroir-voile.on{opacity:1}
+
+.tiroir{position:fixed;top:0;right:0;z-index:180;
+        width:min(430px,100vw);height:100vh;height:100dvh;
+        background:var(--bg-2);border-left:1px solid var(--line);
+        display:flex;flex-direction:column;
+        transform:translateX(100%);
+        transition:transform .5s var(--ease)}
+.tiroir.on{transform:none}
+
+.tiroir-tete{display:flex;align-items:center;justify-content:space-between;
+             padding:22px var(--pad-t);border-bottom:1px solid var(--line);
+             color:var(--fg-mute);flex:none}
+.tiroir{--pad-t:clamp(18px,3vw,28px)}
+.tiroir-tete .mono{color:var(--fg)}
+.tiroir-x{color:var(--fg-mute);transition:color .25s ease}
+.tiroir-x:hover{color:var(--fg)}
+
+/* overflow-y:auto sur le CORPS et non sur le tiroir : la tête et le pied
+   doivent rester en place pendant qu'on fait défiler les articles. Un
+   total qui s'échappe vers le haut dès qu'on ajoute trois lignes, c'est
+   le total qu'on ne voit plus au moment de décider. */
+.tiroir-corps{flex:1;overflow-y:auto;padding:0 var(--pad-t)}
+.tiroir-vide{flex:1;display:grid;place-content:center;text-align:center;
+             gap:20px;padding:0 var(--pad-t);color:var(--fg-mute)}
+
+.tl{display:grid;grid-template-columns:78px 1fr;gap:16px;
+    padding:20px 0;border-bottom:1px solid var(--line)}
+.tl-img{background:var(--bg-3);border:1px solid var(--line);
+        aspect-ratio:4/5;overflow:hidden;display:flex;
+        align-items:center;justify-content:center}
+.tl-img img{width:100%;height:100%;object-fit:contain}
+.tl-nom{font-family:var(--d);font-weight:700;font-size:15px;letter-spacing:-.01em}
+.tl-var{color:var(--fg-mute);margin-top:4px}
+.tl-bas{display:flex;align-items:center;justify-content:space-between;
+        gap:12px;margin-top:12px}
+.tl-prix{font-family:var(--d);font-weight:700;font-size:14px}
+
+/* Le compteur : trois zones, deux boutons et un nombre. Le nombre n'est
+   pas un champ — sur un fichier numérique on n'achète pas dix-sept
+   exemplaires, et un champ libre invite à taper n'importe quoi. */
+.qte{display:inline-flex;align-items:center;border:1px solid var(--line)}
+.qte button{width:30px;height:30px;color:var(--fg-mute);
+            font-family:var(--d);font-weight:700;font-size:14px;
+            transition:color .2s ease,background-color .2s ease}
+.qte button:hover{color:var(--fg);background:var(--bg-3)}
+.qte span{min-width:28px;text-align:center;font-family:var(--d);
+          font-weight:700;font-size:13px}
+
+.tl-x{color:var(--fg-mute);text-decoration:underline;
+      text-underline-offset:3px;transition:color .25s ease}
+.tl-x:hover{color:var(--fg)}
+
+.tiroir-pied{flex:none;padding:22px var(--pad-t) calc(22px + env(safe-area-inset-bottom));
+             border-top:1px solid var(--line);background:var(--bg-2)}
+.tiroir-total{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.tiroir-somme{font-family:var(--d);font-weight:700;font-size:26px;letter-spacing:-.02em}
+.tiroir-note{color:var(--fg-mute);font-size:12px;margin:8px 0 18px}
+.tiroir-pied .btn{width:100%}
+.tiroir-lien{display:block;text-align:center;margin-top:14px;color:var(--fg-mute)}
+
+/* ─── le compteur de la barre ───
+   Il ne s'affiche qu'à partir d'un article : un « 0 » permanent occupe
+   la place sans jamais rien apprendre. */
+/* Le panier s'ouvre TOUJOURS, plein ou vide. Un panier qu'on ne peut
+   consulter que lorsqu'il contient déjà quelque chose oblige à se
+   souvenir de ce qu'on y a mis — et quelqu'un qui revient sur le site le
+   lendemain cherche justement à vérifier.
+   Seule la PASTILLE du compte disparaît à zéro : un « 0 » dans une
+   pastille de couleur occupe la place sans jamais rien apprendre. */
+/* Le sac occupe la MÊME BANDE VERTICALE que la pastille du menu — même
+   top, même hauteur — et son contenu s'y centre tout seul. C'est plus sûr
+   que de calculer un top : le jour où la pastille change de taille, les
+   deux restent alignés sans qu'on y revienne.
+   Et il s'écarte franchement d'elle : collés, deux commandes rondes de
+   tailles différentes se lisent comme un seul objet mal dessiné. */
+.hdr-panier{position:fixed;top:16px;height:68px;
+            right:calc(var(--pad) + 150px);z-index:161;
+            display:inline-flex;align-items:center;gap:9px;
+            font-family:var(--d);font-weight:700;font-size:10px;
+            letter-spacing:.16em;text-transform:uppercase;color:var(--fg-dim);
+            transition:color .3s ease}
+.hdr-panier:hover{color:var(--fg)}
+.hdr-panier.on{color:var(--fg)}
+.hdr-panier b{display:none;place-items:center;min-width:20px;height:20px;
+              padding:0 6px;border-radius:10px;
+              background:var(--acc);color:var(--acc-fg);font-size:10px}
+.hdr-panier.on b{display:grid}
+@media(max-width:860px){.hdr-panier{top:10px;height:56px;right:calc(var(--pad) + 116px)}}
+
+@media(prefers-reduced-motion:reduce){
+  .tiroir,.tiroir-voile{transition:none}
+}
+
+/* ─── la page panier ─────────────────────────────────────────────────
+   Le tiroir sert à vérifier, cette page sert à décider. D'où des lignes
+   plus larges et un total qui ne bouge plus. */
+.panier-vide{border:1px dashed var(--line);padding:clamp(32px,5vw,60px);
+             text-align:center;color:var(--fg-mute)}
+.panier-liste{border-top:1px solid var(--line)}
+.panier-liste .tl{grid-template-columns:110px 1fr;padding:24px 0}
+.panier-somme{margin-top:32px;max-width:340px;margin-left:auto;text-align:right}
+.panier-somme .btn{width:100%;margin-top:6px}
+@media(max-width:640px){
+  .panier-somme{margin-left:0;max-width:none;text-align:left}
+  .panier-liste .tl{grid-template-columns:84px 1fr}
+}
+
+/* ─── la page de paiement ───────────────────────────────────────────
+   Deux colonnes : le formulaire, et le récapitulatif qui reste en vue
+   pendant qu'on remplit. Personne ne remplit une adresse sans pouvoir
+   revérifier ce qu'il paie. */
+.paiement{display:grid;grid-template-columns:1.25fr .85fr;
+          gap:clamp(30px,5vw,70px);align-items:start}
+.paie-recap{position:sticky;top:100px;
+            border:1px solid var(--line);background:var(--bg-2);
+            padding:clamp(20px,2.6vw,30px)}
+.paie-recap .panier-liste{border-top:0}
+.paie-recap .tl{grid-template-columns:64px 1fr;padding:14px 0}
+.paie-recap .tl:first-child{padding-top:0}
+.paie-tt{color:var(--acc-clair);margin:30px 0 16px}
+.paie-form .paie-tt:first-child{margin-top:26px}
+.paie-duo{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.paie-note{color:var(--fg-mute);font-size:12.5px;margin-bottom:18px;max-width:52ch}
+
+
+/* L'encadré qui dit ce que la page est. Il n'est pas décoratif : une
+   maquette de paiement qu'on prend pour la vraie, c'est un visiteur qui
+   tape son numéro de carte dans le vide. */
+.maquette{border:1px solid var(--acc-clair);background:rgba(139,124,255,.08);
+          padding:16px 18px;margin-top:24px;
+          color:var(--fg-dim);font-size:13px;line-height:1.6}
+.maquette b{color:var(--fg);display:block;margin-bottom:4px}
+
+@media(max-width:900px){
+  .paiement{grid-template-columns:1fr}
+  .paie-recap{position:static;order:-1}
+}
+
+/* ─── l'attribut hidden doit gagner ──────────────────────────────────
+   La règle du navigateur, [hidden]{display:none}, n'a qu'une spécificité
+   d'attribut : n'importe quelle classe qui pose un display la bat. Le
+   bloc « panier vide » est en display:grid — il restait donc affiché
+   sous les articles, à dire que le panier était vide alors qu'il ne
+   l'était pas.
+   Ce !important n'est pas une facilité : hidden veut dire « cet élément
+   n'existe pas pour le moment », et rien ne doit pouvoir contredire ça.
+   ─────────────────────────────────────────────────────────────────── */
+[hidden]{display:none!important}
+
+/* Deux sorties côte à côte sous le bouton d'achat. En colonne, elles
+   auraient poussé le bouton hors de l'écran sur un téléphone. */
+.tiroir-liens{display:flex;justify-content:center;gap:22px;
+              flex-wrap:wrap;margin-top:16px}
+.tiroir-liens a{color:var(--fg-mute)}
+
+/* Le sac. 26 px : en dessous, le sigle à l'intérieur se referme et l'on
+   ne voit plus qu'une tache. Il prend la couleur du texte, donc il suit
+   le passage du gris au blanc quand un article arrive. */
+.hdr-panier svg{width:26px;height:26px;display:block}
+.hdr-panier{gap:7px}
+
+/* ══════════════════════════════════════════════════════════════════════
+   LE TIROIR, EN CLAIR
+
+   Le panier passe sur fond blanc — le même plan que le menu. Sur une
+   page bleu nuit, un panneau clair se lit comme un ailleurs : on n'est
+   plus dans la page, on est dans son panier.
+
+   Ce qui change TOUT le reste : sur du clair, un survol ne peut plus
+   monter vers le blanc. Chaque état actif du tiroir descend donc vers le
+   noir. C'est la règle qu'on s'est déjà prise dans le menu — un jeton
+   nommé pour son usage se règle sur ce qu'il accompagne, il ne garde pas
+   sa valeur quand le fond change.
+
+   Le survol du sac dans la BARRE ne bouge pas : lui est resté sur le
+   fond bleu nuit, il continue de monter vers le blanc.
+   ══════════════════════════════════════════════════════════════════════ */
+.tiroir{background:var(--fg);color:var(--bg);border-left:0}
+
+.tiroir-tete{border-bottom-color:rgba(10,18,28,.14)}
+.tiroir-tete .mono{color:var(--bg)}
+.tiroir-x{color:rgba(10,18,28,.5)}
+.tiroir-x:hover{color:var(--bg)}
+
+.tiroir .tl{border-bottom-color:rgba(10,18,28,.14)}
+.tiroir .tl-img{background:rgba(10,18,28,.05);border-color:rgba(10,18,28,.14)}
+.tiroir .tl-var{color:rgba(10,18,28,.5)}
+
+.tiroir .qte{border-color:rgba(10,18,28,.2)}
+.tiroir .qte a,.tiroir .qte button{color:rgba(10,18,28,.5)}
+.tiroir .qte a:hover,.tiroir .qte button:hover{color:var(--bg);background:rgba(10,18,28,.06)}
+
+/* Le même nom, tout en bas du tiroir. Il est posé HORS de .tiroir-pied,
+   qui reste masqué tant que le panier est vide : le panneau doit être
+   signé dans les deux états, plein comme vide.
+   La garde du bas — encoche de l'iPhone comprise — lui revient donc,
+   puisque c'est lui le dernier élément ; le pied la rend. */
+.tiroir-pied{padding-bottom:16px}
+/* Même largeur que la tête du tiroir : le mot part sous le C de Cart et
+   s'arrête sous le e de Close. C'est var(--pad-t) qui tient les deux. */
+.tiroir-mot{flex:none;display:block;white-space:nowrap;line-height:.82;font-size:22px;
+            padding:0 var(--pad-t) calc(18px + env(safe-area-inset-bottom))}
+
+.tiroir .tl-x{color:rgba(10,18,28,.5)}
+.tiroir .tl-x:hover{color:var(--bg)}
+
+.tiroir-vide{color:rgba(10,18,28,.55)}
+.tiroir-pied{background:var(--fg);border-top-color:rgba(10,18,28,.14)}
+.tiroir-note{color:rgba(10,18,28,.5)}
+.tiroir-liens a{color:rgba(10,18,28,.5)}
+.tiroir-liens a:hover{color:var(--bg)}
+
+/* Le bouton d'achat s'inverse lui aussi. Son survol montait vers le
+   blanc : sur un panneau blanc, il aurait effacé le bouton. Il descend
+   maintenant vers le bleu nuit, texte clair. */
+.tiroir .btn::before{background:var(--bg)}
+.tiroir .btn:hover{color:var(--fg)}
+.tiroir .btn--fant{border-color:rgba(10,18,28,.2);color:var(--bg)}
+.tiroir .btn--fant::before{background:var(--bg)}
+
+/* ─── le sac, quand le menu est ouvert ───────────────────────────────
+   Le panneau du menu est blanc et le sac du panier passe par-dessus : il
+   se retrouve donc sur du clair. Monter vers le blanc au survol l'y
+   ferait disparaître — il descend vers le noir, comme tout ce qui vit
+   sur un fond clair dans ce thème.
+   Le drapeau est posé sur <body> et non sur un frère du sac : le panneau
+   et lui n'ont pas le même parent, aucun sélecteur de frère ne peut les
+   relier.
+   ─────────────────────────────────────────────────────────────────── */
+body.menu-on .hdr-panier{color:rgba(10,18,28,.5)}
+body.menu-on .hdr-panier.on,
+body.menu-on .hdr-panier:hover{color:var(--bg)}
+
+/* ─── les champs ──────────────────────────────────────────────────────
+   De longues cases sombres, pas les boîtes blanches du navigateur. Un
+   champ non habillé arrive avec le style du système : fond blanc, bord
+   gris, coins arrondis — trois choses que cette page n'a nulle part
+   ailleurs, et qui la font ressembler à un formulaire administratif posé
+   sur une page de mode.
+
+   Le libellé est AU-DESSUS et non dedans. Un libellé placé à l'intérieur
+   disparaît dès qu'on écrit, et l'on ne sait plus ce qu'on remplit —
+   c'est le défaut qu'on ne voit qu'en relisant sa propre saisie.
+   ─────────────────────────────────────────────────────────────────── */
+.champ{display:block;width:100%;
+       background:var(--bg-2);border:1px solid var(--line);
+       color:var(--fg);font:inherit;font-size:15px;
+       padding:15px 17px;margin-bottom:22px;
+       transition:border-color .3s ease,background-color .3s ease}
+.champ::placeholder{color:var(--fg-mute)}
+.champ:hover{border-color:var(--fg-mute)}
+/* Le focus se voit sur DEUX propriétés : le filet prend l'accent et le
+   fond s'éclaircit. Sur un seul, un daltonien ne verrait rien changer. */
+.champ:focus{outline:0;border-color:var(--acc-clair);background:var(--bg-3)}
+.champ:disabled{opacity:.4;cursor:not-allowed}
+.champ:disabled:hover{border-color:var(--line)}
+
+.champ--qty{display:inline-block;width:78px;margin:0;padding:9px 10px;text-align:center}
+
+/* La flèche du menu déroulant est dessinée en dégradés : le triangle
+   natif n'est pas stylable et arrive gris clair sur fond sombre. */
+select.champ{appearance:none;-webkit-appearance:none;cursor:pointer;
+             background-image:linear-gradient(45deg,transparent 50%,var(--fg-dim) 50%),
+                              linear-gradient(135deg,var(--fg-dim) 50%,transparent 50%);
+             background-position:calc(100% - 20px) 24px,calc(100% - 15px) 24px;
+             background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+textarea.champ{resize:vertical;min-height:150px;line-height:1.6}
+
+label.mono{display:block;color:var(--fg-mute);margin-bottom:9px}
+
+.case{display:flex;align-items:center;gap:10px;margin:4px 0 22px;
+      color:var(--fg-dim);font-size:13.5px;cursor:pointer}
+.case input{width:16px;height:16px;accent-color:var(--acc)}
+
+.boite{border:1px solid var(--line);background:var(--bg-2);padding:18px}
+.wrap--texte{max-width:820px}
+.wrap--forme{max-width:520px}
+
+/* ─── contact ─── */
+.contact{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(30px,5vw,80px);
+         align-items:start}
+.contact-info{display:grid;gap:26px}
+.contact-info .mono{color:var(--fg-mute);margin-bottom:8px}
+@media(max-width:820px){.contact{grid-template-columns:1fr}}
+
+/* ─── texte riche ─── */
+.rte{color:var(--fg-dim);line-height:1.75}
+.rte > * + *{margin-top:1em}
+.rte a{color:var(--acc-clair);text-decoration:underline;text-underline-offset:3px}
+
+/* Le bouton d'envoi ne prend pas toute la largeur. Un bouton de 1 200 px
+   pour cinq lettres n'est pas plus facile à atteindre — il est seulement
+   plus lourd que le formulaire qu'il conclut. */
+.paie-form .btn{width:auto;min-width:190px;margin-top:6px}
+.paie-form .paie-tt:first-child{margin-top:26px}
+.paie-duo{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.paie-tt{color:var(--acc-clair);margin:30px 0 16px}
+.paie-note{color:var(--fg-mute);font-size:12.5px;margin-bottom:18px;max-width:52ch}
+
+/* Le bouton de PAIEMENT, lui, garde toute la largeur : c'est l'action
+   terminale du site, la seule que la page existe pour recevoir. Le
+   contraire du bouton d'envoi d'un message, qui n'est qu'une politesse
+   au bout d'un formulaire. */
+.paie-form .btn--large{width:100%;min-width:0}
+
+/* ─── les avis ────────────────────────────────────────────────────────
+   La moyenne en grand, les étoiles dessinées en SVG, et le compte à
+   côté. Le nombre d'avis compte autant que la note : « 4,9 » sur trois
+   avis et « 4,6 » sur deux cents ne disent pas la même chose, et le
+   visiteur le sait.
+   ─────────────────────────────────────────────────────────────────── */
+.avis-tete{display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+           justify-content:center;margin-bottom:clamp(28px,4vw,48px)}
+.avis-chiffre{font-family:var(--d);font-weight:700;font-size:44px;
+              letter-spacing:-.03em;line-height:1}
+.avis-n{color:var(--fg-mute)}
+
+.etoiles{display:inline-flex;gap:3px;color:var(--acc-clair);vertical-align:middle}
+.etoile{width:17px;height:17px;display:block}
+
+/* La note sous le titre du produit : un lien vers la section du bas.
+   Cliquer sur une note pour lire les avis est le geste que tout le monde
+   fait ; ne pas le prévoir, c'est laisser le visiteur chercher. */
+.note-lien{display:inline-flex;align-items:center;gap:10px;
+           color:var(--fg-dim);transition:color .25s ease}
+.note-lien:hover{color:var(--fg)}
+.note-lien .etoiles{color:var(--acc-clair)}
+
+.avis-appli{max-width:900px;margin:0 auto}
+
+/* ─── les cartes d'avis ───────────────────────────────────────────────
+   Trois colonnes qui deviennent une en pile. Les avis se lisent en
+   diagonale : on cherche la note, puis on s'arrête sur celui qui parle
+   du problème qu'on a. D'où la note EN HAUT de chaque carte, avant le
+   texte — et non sous le nom, où l'œil ne va pas la chercher.
+   ─────────────────────────────────────────────────────────────────── */
+.avis-liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+            gap:clamp(14px,1.8vw,22px);max-width:1100px;margin:0 auto}
+.av{border:1px solid var(--line);background:var(--bg-2);
+    padding:clamp(20px,2.4vw,28px);display:flex;flex-direction:column}
+.av-tete{display:flex;align-items:center;justify-content:space-between;
+         gap:14px;margin-bottom:16px}
+.av-date{color:var(--fg-mute)}
+.av-titre{font-family:var(--d);font-weight:700;font-size:16px;
+          letter-spacing:-.01em;margin-bottom:10px}
+.av-texte{color:var(--fg-dim);font-size:13.5px;line-height:1.65;flex:1}
+.av-nom{margin-top:20px;color:var(--fg);display:flex;align-items:center;
+        gap:10px;flex-wrap:wrap}
+.av-ok{display:inline-flex;align-items:center;gap:5px;color:var(--acc-clair)}
+.av-ok svg{width:11px;height:11px}
+
+/* ─── le formulaire d'avis ─────────────────────────────────────────── */
+.avis-form{max-width:560px;margin:clamp(34px,5vw,56px) auto 0;
+           border-top:1px solid var(--line);padding-top:clamp(30px,4vw,46px)}
+.avis-form h3{font-family:var(--d);font-weight:700;text-transform:uppercase;
+              font-size:clamp(18px,2vw,24px);letter-spacing:-.02em;margin-bottom:22px}
+
+/* ─── les cinq étoiles cliquables ─────────────────────────────────────
+   Ce sont de vrais boutons radio, cachés sous les étoiles. Des <div>
+   avec un écouteur de clic auraient le même aspect, mais la note ne
+   serait ni atteignable au clavier, ni annoncée par un lecteur d'écran,
+   ni envoyée par le formulaire.
+
+   L'ordre du DOM est INVERSÉ — 5, 4, 3, 2, 1 — et la rangée est remise
+   à l'endroit par row-reverse. C'est ce qui rend l'allumage possible en
+   CSS seul : le sélecteur « ~ » ne voit que les frères SUIVANTS, donc
+   cocher la 4ᵉ allume 4, 3, 2, 1 et laisse la 5ᵉ éteinte.
+   ─────────────────────────────────────────────────────────────────── */
+.notes{display:flex;flex-direction:row-reverse;justify-content:flex-end;
+       gap:6px;margin-bottom:24px}
+.notes input{position:absolute;opacity:0;width:0;height:0}
+.notes label{cursor:pointer;color:var(--fg-mute);line-height:0;
+             transition:color .18s ease,transform .18s ease}
+.notes label svg{width:30px;height:30px;display:block}
+.notes label:hover{transform:scale(1.12)}
+
+/* Allumées : celle qu'on survole et toutes celles d'avant. */
+.notes label:hover,
+.notes label:hover ~ label,
+.notes input:checked ~ label{color:var(--acc-clair)}
+
+/* Le survol l'emporte sur la sélection : sinon, en glissant de la 5ᵉ à
+   la 2ᵉ, les trois du dessus resteraient allumées et l'on ne saurait
+   plus ce qu'on est en train de choisir. */
+.notes:hover input:checked ~ label{color:var(--fg-mute)}
+.notes:hover label:hover,
+.notes:hover label:hover ~ label{color:var(--acc-clair)}
+
+.notes input:focus-visible + label{outline:2px solid var(--acc-clair);outline-offset:3px}
+
+/* ─── le logotype du coin ─────────────────────────────────────────────
+   Même bande verticale que la pastille du menu et le sac : top et height
+   identiques, le contenu se centre dedans. Les trois commandes du haut
+   de page sont ainsi sur un seul axe, sans qu'aucune position ne soit
+   calculée à la main.
+   FLOW dans l'accent clair : un mot de neuf lettres d'un seul ton se lit
+   comme un bloc et plus comme un nom.
+   ─────────────────────────────────────────────────────────────────── */
+/* Il ne partage PAS la bande verticale de la pastille et du sac. Ces
+   deux-là sont de grosses commandes rondes, centrées dans 68 px : s'y
+   aligner poussait le nom à cinquante pixels du bord, et il paraissait
+   tomber au milieu de la page au lieu d'en tenir le coin.
+   Ici il se cale sur le HAUT, pas sur un centre. */
+/* absolute et non fixed : il appartient au HAUT DE LA PAGE, pas à
+   l'écran. En fixe, il restait collé au bord pendant qu'on descendait —
+   il donnait l'impression de suivre le lecteur. Ici il se laisse
+   dépasser, comme un titre de couverture.
+   La pastille du menu et le sac restent fixes, eux : ce sont des
+   commandes, on doit pouvoir les atteindre à n'importe quelle hauteur. */
+.marque-coin{position:absolute;top:22px;left:var(--pad);z-index:161;
+             display:inline-block;line-height:1;
+             font-family:var(--d);font-weight:700;font-size:19px;
+             letter-spacing:-.05em;text-transform:uppercase;color:var(--fg);
+             -webkit-user-select:none;user-select:none}
+.marque-coin span{font-weight:400;color:var(--acc-clair)}
+@media(max-width:860px){.marque-coin{top:16px;font-size:16px}}
+
+/* Sur téléphone, le panneau du menu prend tout l'écran et passe sous le
+   logotype : il descend alors vers le noir, comme tout ce qui se
+   retrouve sur du clair dans ce thème. */
+@media(max-width:640px){
+  body.menu-on .marque-coin{color:var(--bg)}
+  body.menu-on .marque-coin span{color:var(--acc)}
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   LES PAGES LÉGALES
+
+   Ce sont les seules pages du site qu'on lit VRAIMENT, ligne à ligne, et
+   souvent en cherchant une phrase précise. Tout y est réglé pour ça.
+
+   La colonne est étroite : au-delà de 75 caractères, l'œil perd le début
+   de la ligne suivante et l'on relit deux fois la même. Le texte est un
+   cran plus grand qu'ailleurs et son interligne plus ouvert. Et les
+   titres intermédiaires respirent beaucoup plus que dans une page de
+   vente — ce sont eux qui permettent de balayer un texte long pour
+   trouver le paragraphe qu'on cherche.
+   ══════════════════════════════════════════════════════════════════════ */
+.legal{padding-top:clamp(96px,13vh,150px)}
+.legal-tete{margin-bottom:clamp(34px,5vw,56px);
+            padding-bottom:clamp(24px,3vw,36px);
+            border-bottom:1px solid var(--line)}
+.legal-date{color:var(--fg-mute);margin-top:16px}
+.legal-retour{margin-top:clamp(40px,6vw,72px);
+              padding-top:clamp(24px,3vw,36px);
+              border-top:1px solid var(--line)}
+
+.rte--legal{font-size:15.5px;line-height:1.85;max-width:68ch}
+.rte--legal > * + *{margin-top:1.15em}
+.rte--legal h2{font-family:var(--d);font-weight:700;text-transform:uppercase;
+               font-size:clamp(17px,1.8vw,21px);letter-spacing:-.01em;
+               color:var(--fg);margin-top:2.4em;margin-bottom:.2em}
+.rte--legal h3{font-family:var(--d);font-weight:700;
+               font-size:16px;letter-spacing:-.01em;
+               color:var(--fg);margin-top:1.8em;margin-bottom:.2em}
+.rte--legal ul,.rte--legal ol{padding-left:1.4em}
+.rte--legal li{margin-top:.55em}
+.rte--legal li::marker{color:var(--fg-mute)}
+
+/* Le premier titre ne prend pas la grande marge : il suit l'en-tête, qui
+   a déjà posé la séparation. */
+.rte--legal > h2:first-child,
+.rte--legal > h3:first-child{margin-top:0}
+
+/* Un tableau de frais ou de délais reste lisible sur téléphone : il
+   défile dans sa propre boîte au lieu de pousser la page. */
+.rte--legal table{width:100%;border-collapse:collapse;display:block;
+                  overflow-x:auto;font-size:14px}
+.rte--legal th,.rte--legal td{border:1px solid var(--line);
+                              padding:10px 12px;text-align:left}
+.rte--legal th{color:var(--fg);font-family:var(--d);font-weight:700;
+               font-size:11px;letter-spacing:.1em;text-transform:uppercase}

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Renderflow — Shopify Theme Store I Design, Build and Sell</title>
+  <meta name="description" content="Renderflow is my own Shopify theme store: the storefront, the themes inside it and the setup guide that ships with each one. Live since September 2026 at renderflow.shop." />
+  <meta name="author" content="Antonin Le Cleï" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.antoninleclei.com/projects/renderflow/" />
+  <link rel="alternate" hreflang="en-ca" href="https://www.antoninleclei.com/projects/renderflow/" />
+  <link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/renderflow/" />
+  <link rel="alternate" hreflang="fr-ca" href="https://www.antoninleclei.com/fr/realisations/renderflow/" />
+  <link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/renderflow/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/renderflow/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Antonin Le Cleï" />
+  <meta property="og:locale" content="en_CA" />
+  <meta property="og:locale:alternate" content="fr_CA" />
+  <meta property="og:title" content="Renderflow — Shopify Theme Store I Design, Build and Sell" />
+  <meta property="og:description" content="Renderflow is my own Shopify theme store: the storefront, the themes inside it and the setup guide that ships with each one. Live since September 2026 at renderflow.shop." />
+  <meta property="og:url" content="https://www.antoninleclei.com/projects/renderflow/" />
+  <meta property="og:image" content="https://www.antoninleclei.com/ImageeeA.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Renderflow — Shopify Theme Store I Design, Build and Sell" />
+  <meta name="twitter:description" content="Renderflow is my own Shopify theme store: the storefront, the themes inside it and the setup guide that ships with each one. Live since September 2026 at renderflow.shop." />
+  <meta name="twitter:image" content="https://www.antoninleclei.com/ImageeeA.png" />
+  <script type="application/ld+json" data-seo>
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://www.antoninleclei.com/"},
+      {"@type":"ListItem","position":2,"name":"Projects","item":"https://www.antoninleclei.com/projects/"},
+      {"@type":"ListItem","position":3,"name":"Renderflow","item":"https://www.antoninleclei.com/projects/renderflow/"}
+  ]}
+  </script>
+  <link rel="icon" type="image/png" href="../../favicon-circle.png" />
+  <link rel="apple-touch-icon" href="../../favicon-circle.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <link rel="stylesheet" href="../../style.css" />
+  <script>document.documentElement.classList.add('entering');</script>
+
+  <style>
+    body { background: #ffffff; color: #1a1a1a; }
+
+    .proj-page {
+      margin-left: var(--nav-w);
+      padding: 140px var(--edge) 100px;
+      min-height: 100vh;
+    }
+
+    .proj-back {
+      position: fixed;
+      top: var(--edge);
+      left: var(--edge);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #1a1a1a;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .project-entry { max-width: 900px; }
+
+    .proj-index {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: #999;
+      margin-bottom: 18px;
+    }
+
+    .proj-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: #e8a020;
+      text-transform: uppercase;
+      border: 1px solid #e8a020;
+      padding: 4px 12px;
+      margin-bottom: 28px;
+    }
+
+    .proj-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #e8a020;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .proj-title {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 700;
+      line-height: 1.05;
+      color: #1a1a1a;
+      margin: 0 0 10px;
+    }
+
+    .proj-title em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .proj-divider {
+      width: 100%;
+      height: 1px;
+      background: #e0e0e0;
+      margin: 36px 0;
+    }
+
+    .proj-overview {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 64px;
+      margin-bottom: 64px;
+    }
+
+    .proj-meta { padding-top: 4px; }
+
+    .proj-meta-item { margin-bottom: 28px; }
+
+    .proj-meta-key {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      color: #bbb;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .proj-meta-val {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+
+    .proj-meta-val.in-progress { color: #e8a020; }
+
+    .proj-body p {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 22px;
+    }
+
+    .proj-body p:last-child { margin-bottom: 0; }
+
+    /* ── Coming Soon block ── */
+    .coming-soon-block {
+      border: 1px solid #e0e0e0;
+      padding: 60px 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .cs-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: #bbb;
+      text-transform: uppercase;
+    }
+
+    .cs-title {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0;
+    }
+
+    .cs-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: #999;
+    }
+
+    .cs-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #bbb;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 1024px) {
+      .proj-page { margin-left: 0; padding: 100px var(--edge) 60px; }
+      .proj-overview { grid-template-columns: 160px 1fr; gap: 0 40px; }
+    }
+
+    @media (max-width: 680px) {
+      .proj-overview { grid-template-columns: 1fr; }
+      .proj-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; margin-bottom: 32px; }
+      .coming-soon-block { padding: 40px 24px; }
+    }
+
+    /* Live demo: a hosted copy of the client site, framed like a browser
+       window. Breaks out of the 900px text column, bounded by the viewport so
+       it never causes horizontal scroll. */
+    .proj-demo {
+      margin: 64px 0 0;
+      width: min(1400px, calc(100vw - var(--nav-w) - 2 * var(--edge)));
+      border: 1px solid #e0e0e0;
+      background: #ffffff;
+      /* body sets cursor: none for the custom dot — give the pointer back
+         over the demo, where the framed site is driven normally */
+      cursor: auto;
+    }
+    .proj-demo-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 40px;
+      padding: 0 16px;
+      background: #f4f4f4;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .proj-demo-dots { display: flex; gap: 6px; flex-shrink: 0; }
+    .proj-demo-dots span {
+      width: 9px; height: 9px; border-radius: 50%; background: #d4d4d4;
+    }
+    .proj-demo-frame {
+      height: min(78vh, 760px);
+      background: #ffffff;
+    }
+    .proj-demo-frame iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .proj-demo-note {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: #999;
+      text-transform: uppercase;
+      margin-top: 14px;
+    }
+    .proj-demo-note a { color: #1a1a1a; }
+
+    /* Outbound links. This project is the only one that still exists as a
+       running business, so the page has somewhere real to point. Same border
+       and mono casing as .proj-status, so the row reads as part of the set. */
+    .proj-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .proj-link {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      text-decoration: none;
+      border: 1px solid #1a1a1a;
+      padding: 10px 18px;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    .proj-link:hover { background: #1a1a1a; color: #ffffff; }
+    .proj-link.is-quiet { color: #999; border-color: #e0e0e0; }
+    .proj-link.is-quiet:hover { background: #ffffff; color: #1a1a1a; border-color: #1a1a1a; }
+    @media (max-width: 1024px) {
+      .proj-demo { width: 100%; }
+      .proj-demo-frame { height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ui-header">
+    <div class="ui-header-name">
+      <a href="../../index.html" class="ui-name"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">A</span><span class="nav-char-bot" style="transition-delay:0s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">N</span><span class="nav-char-bot" style="transition-delay:.02s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">T</span><span class="nav-char-bot" style="transition-delay:.04s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">O</span><span class="nav-char-bot" style="transition-delay:.06s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">N</span><span class="nav-char-bot" style="transition-delay:.08s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">I</span><span class="nav-char-bot" style="transition-delay:.10s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">N</span><span class="nav-char-bot" style="transition-delay:.12s">N</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">L</span><span class="nav-char-bot" style="transition-delay:.14s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">E</span><span class="nav-char-bot" style="transition-delay:.16s">E</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">C</span><span class="nav-char-bot" style="transition-delay:.18s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">L</span><span class="nav-char-bot" style="transition-delay:.20s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.22s">E</span><span class="nav-char-bot" style="transition-delay:.22s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.24s">Ï</span><span class="nav-char-bot" style="transition-delay:.24s">Ï</span></span></a>
+      <span class="ui-role">DIGITAL DESIGNER</span>
+    </div>
+    <div class="ui-header-time">
+      <span class="ui-time" id="clockTime">--:-- --</span>
+      <span class="ui-date" id="clockDate">-- ------- ---- [FR]</span>
+        <div class="ui-lang" role="group" aria-label="Language">
+          <a href="/projects/renderflow/" aria-current="true" hreflang="en" title="Français">EN</a>
+          <span class="ui-lang-sep">/</span>
+          <a href="/fr/realisations/renderflow/" hreflang="fr" title="Voir le site en français">FR</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="page-overlay"></div>
+
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot" id="cursorDot"></div>
+  </div>
+
+  <a href="../index.html" class="proj-back"><span style="font-size:28px">←</span> <span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">B</span><span class="nav-char-bot" style="transition-delay:0s">B</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">A</span><span class="nav-char-bot" style="transition-delay:.02s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">C</span><span class="nav-char-bot" style="transition-delay:.04s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">K</span><span class="nav-char-bot" style="transition-delay:.06s">K</span></span></a>
+
+  <main class="proj-page">
+
+    <article class="project-entry">
+
+      <p class="proj-index">[03]</p>
+
+      <h1 class="proj-title">Renderflow <em>&mdash; Shopify Theme Store</em></h1>
+
+      <div class="proj-divider"></div>
+
+      <div class="proj-overview">
+
+        <div class="proj-meta">
+          <div class="proj-meta-item">
+            <span class="proj-meta-key">Type</span>
+            <span class="proj-meta-val">Shopify Themes</span>
+          </div>
+          <div class="proj-meta-item">
+            <span class="proj-meta-key">Year</span>
+            <span class="proj-meta-val">2026</span>
+          </div>
+          <div class="proj-meta-item">
+            <span class="proj-meta-key">Date</span>
+            <span class="proj-meta-val">September 2026</span>
+          </div>
+          <div class="proj-meta-item">
+            <span class="proj-meta-key">Role</span>
+            <span class="proj-meta-val">Design, Build &amp; Sell</span>
+          </div>
+        </div>
+
+        <div class="proj-body">
+          <p>
+            Renderflow is my own product rather than a client&rsquo;s. It is a store that sells
+            Shopify themes, and I built every part of it: the storefront, the themes on sale
+            inside it, the illustrated guide that ships with each one, and the support address
+            behind them. It has been live since September 2026.
+          </p>
+          <p>
+            The first theme is Vantage, a storefront built for a clothing brand. Search, cart,
+            customer accounts and an FAQ are part of the theme, so none of them arrives as a
+            paid app on the merchant&rsquo;s monthly bill. It sells for &euro;89 at launch price,
+            going to &euro;129 afterwards, and comes with four demo products and their sixteen
+            royalty-free photos &mdash; enough that a new store looks like a store within minutes
+            of installing, instead of showing an empty grid.
+          </p>
+          <p>
+            Selling a theme means writing code somebody else will edit, which changes how it has
+            to be written. Shopify&rsquo;s editor lets a merchant add and move sections without
+            reloading the page, so each section registers its own behaviour instead of binding
+            once at load &mdash; skip that and every section added after the first page view sits
+            dead, which is the single most common reason a theme is rejected. Movement stays on
+            transform and opacity, the two properties the browser can hand to the GPU, because
+            the Theme Store requires a performance score of at least 60 and animating anything
+            that triggers layout puts it out of reach.
+          </p>
+          <p>
+            The storefront around the themes is hand-built rather than a Shopify template: the
+            transitions between pages, the cart that opens as a drawer over the page instead of
+            replacing it, and the curve that bends as the menu opens. Two of the three shelves
+            read &ldquo;incoming&rdquo; on purpose &mdash; a shelf with room on it says more than
+            one product alone in the middle of a page.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="proj-links">
+        <a class="proj-link" href="https://renderflow.shop" target="_blank" rel="noopener">Visit the store &#8599;</a>
+        <a class="proj-link is-quiet" href="https://renderflow.shop/products/vantage" target="_blank" rel="noopener">Vantage, the first theme &#8599;</a>
+      </div>
+
+      <div class="proj-demo">
+        <div class="proj-demo-bar">
+          <div class="proj-demo-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="proj-demo-frame">
+          <iframe src="/demos/renderflow/" title="Renderflow &mdash; interactive store demo" loading="lazy"></iframe>
+        </div>
+      </div>
+      <p class="proj-demo-note">Scroll and click inside the frame &mdash; browse the themes, open a product, add it to the cart. It is the store itself, with checkout and anything else that would leave it disabled. <a href="/demos/renderflow/" target="_blank" rel="noopener">Open full screen &#8599;</a></p>
+
+
+    </article>
+
+  </main>
+
+  <script>
+    window.addEventListener('load', () => {
+
+      // ── BACK → /projects avec fondu noir
+      ['.proj-back', '.ui-name'].forEach(sel => {
+        document.querySelector(sel)?.addEventListener('click', e => {
+          e.preventDefault();
+          const href = sel === '.ui-name' ? '../../' : '../';
+          gsap.to('.page-overlay', {
+            opacity: 1, duration: 0.3, ease: 'power2.in',
+            onComplete: () => { window.location.href = href; }
+          });
+        });
+      });
+
+      // ── Clock ──────────────────────────────────────────────
+      function updateClock() {
+        const now = new Date();
+        const h = now.getHours() % 12 || 12;
+        const m = String(now.getMinutes()).padStart(2,'0');
+        const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+        const months = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+        const d = String(now.getDate()).padStart(2,'0');
+        const mon = months[now.getMonth()];
+        const y = now.getFullYear();
+        const t = document.getElementById('clockTime');
+        const dt = document.getElementById('clockDate');
+        if (t) t.textContent = `${h}:${m} ${ampm}`;
+        if (dt) dt.textContent = `${d} ${mon} ${y} [FR]`;
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      // ── Light mode header ──────────────────────────────────
+      document.querySelector('.ui-header')?.classList.add('on-light');
+
+      // ── Custom cursor ──────────────────────────────────────
+      const cursorEl  = document.getElementById('cursor');
+      const cursorDot = document.getElementById('cursorDot');
+
+      document.addEventListener('mousemove', e => {
+        gsap.set(cursorEl, { x: e.clientX, y: e.clientY });
+        updateCursorState(e.target);
+      });
+      document.addEventListener('mouseleave', () => gsap.to(cursorDot, { opacity: 0, duration: 0.2 }));
+      document.addEventListener('mouseenter', () => gsap.to(cursorDot, { opacity: 1, duration: 0.2 }));
+
+      // ── Hide the dot over the demo ─────────────────────────
+      // The iframe swallows mousemove, so the dot would freeze at the edge
+      // while the real cursor moves around inside the framed site.
+      const demo = document.querySelector('.proj-demo');
+      if (demo) {
+        demo.addEventListener('mouseenter', () => gsap.to(cursorEl, { opacity: 0, duration: 0.2 }));
+        demo.addEventListener('mouseleave', () => gsap.to(cursorEl, { opacity: 1, duration: 0.2 }));
+        // Clicking inside the iframe moves focus there without firing mouseleave.
+        window.addEventListener('blur', () => gsap.to(cursorEl, { opacity: 0, duration: 0.2 }));
+        window.addEventListener('focus', () => gsap.to(cursorEl, { opacity: 1, duration: 0.2 }));
+      }
+
+      const STATES = {
+        dot:  { width: 7,  height: 7,  borderRadius: '50%', duration: 0.2,  ease: 'power3.out' },
+        bar:  { width: 2,  height: 22, borderRadius: '1px', duration: 0.18, ease: 'power3.out' },
+        grow: { width: 11, height: 11, borderRadius: '50%', duration: 0.2,  ease: 'power3.out' },
+      };
+      let activeCursorState = 'dot';
+      const TEXT_TAGS = new Set(['P','H1','H2','H3','H4','H5','H6','SPAN','LI']);
+      const CLICKABLE = 'a, button, label';
+
+      function getDesiredState(target) {
+        let el = target;
+        while (el && el !== document.documentElement) {
+          if (el.matches && el.matches(CLICKABLE)) return 'grow';
+          if (TEXT_TAGS.has(el.tagName)) {
+            if (el.closest(CLICKABLE)) return 'grow';
+            return 'bar';
+          }
+          el = el.parentElement;
+        }
+        return 'dot';
+      }
+      function updateCursorState(target) {
+        const desired = getDesiredState(target);
+        if (desired === activeCursorState) return;
+        activeCursorState = desired;
+        gsap.to(cursorDot, STATES[desired]);
+      }
+
+    });
+  </script>
+
+</body>
+</html>

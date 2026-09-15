@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Renderflow — Shopify themes for brands and businesses</title>
+<meta name="description" content="Shopify themes for brands and businesses. One payment, no apps required.">
+<script>
+  /* Le voile doit exister AVANT le premier rendu : posé plus tard, on
+     verrait la page d'arrivée une fraction de seconde avant qu'il ne la
+     recouvre. D'où ce script en ligne, et non dans un fichier différé. */
+  (function(){try{
+    if(sessionStorage.getItem('px-transition')==='1')
+      document.documentElement.className+=' px-entree';
+  }catch(e){}})();
+</script>
+<link rel="stylesheet" href="assets/base.css?v=1788625590">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="assets/px.js?v=1788625590" defer></script>
+<script src="assets/site.js?v=1788625590" defer></script>
+<script src="assets/panier.js?v=1788625590" defer></script>
+<script src="/demos/demo-guard.js"></script>
+</head>
+<body>
+
+<!-- Le voile de transition. Ses cases sont bâties par px.js. -->
+<div class="px" aria-hidden="true"></div>
+
+<!-- ═══ MENU RIDEAU ═══ -->
+<button class="mbtn" id="mbtn" type="button"
+        aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+  <span class="mbtn-mot" aria-hidden="true">Menu</span>
+  <span class="mbtn-x" aria-hidden="true"></span>
+</button>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-in">
+    <nav class="menu-nav" id="menu-nav" aria-label="Main">
+      <div class="menu-tt" aria-hidden="true"></div>
+
+      <div class="menu-l" data-href="index.html">
+        <span class="menu-dot" aria-hidden="true"></span>
+        <a href="index.html">Home</a>
+      </div>
+      <div class="menu-l" data-href="themes.html">
+        <span class="menu-dot" aria-hidden="true"></span>
+        <a href="themes.html">Themes</a>
+      </div>
+      <div class="menu-l" data-href="support.html">
+        <span class="menu-dot" aria-hidden="true"></span>
+        <!-- Support ET Contact disaient la même chose : une question sans
+             réponse. Une seule entrée, une seule page — la FAQ pour ce
+             qui est déjà répondu, le formulaire pour le reste. -->
+        <a href="support.html">Support</a>
+      </div>
+    </nav>
+
+    <!-- Le nom signe le bas du panneau, comme il signe le pied de page.
+         Ici le panneau est clair : RENDER prend le noir du panneau,
+         FLOW garde le violet — la même paire qu'en bas du site, à
+         l'envers du fond. Il vient APRÈS les réseaux : c'est une
+         signature, elle se pose en dernier. -->
+    <div class="menu-bas">
+      <div class="menu-pied">
+        <!-- ⬇ TES RÉSEAUX -->
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">TikTok</a>
+        <!-- ⬇ TON ADRESSE -->
+        <a href="mailto:support@renderflow.shop">support@renderflow.shop</a>
+      </div>
+      <div class="logo-mot menu-mot" data-ajuster>RENDER<span>FLOW</span></div>
+    </div>
+  </div>
+
+  <!-- Le bord courbe. Le viewBox l'étire sur toute la hauteur de la
+       fenêtre ; seul l'attribut « d » est animé, par site.js. -->
+  <svg class="menu-courbe" viewBox="0 0 100 1000" preserveAspectRatio="none"
+       aria-hidden="true" focusable="false">
+    <path id="menu-trace" d="M100 0 L200 0 L200 1000 L100 1000 Q-100 500 100 0"></path>
+  </svg>
+</div>
+
+
+<!-- ═══ HERO ═══
+     Le sigle occupe le premier écran, et rien d'autre ne lui dispute la
+     place. C'est la seule page où la marque a le droit d'être grande :
+     ailleurs elle retourne dans la barre, à 40 px. -->
+<section class="hero">
+  <div class="wrap hero-in">
+
+    <!-- data-parallaxe : le sigle suit le curseur. Pas un lien — on est
+         déjà sur l'accueil, et un lien qui ne mène nulle part est un
+         piège pour qui navigue au clavier. -->
+    <div class="hero-logo" data-parallaxe>
+      <img src="img/logo-rf.png" alt="Renderflow" draggable="false" width="1208" height="672">
+    </div>
+
+    <!-- Une ligne, un bouton. C'est un accueil de MARQUE : il dit ce
+         qu'on fabrique, pas ce que vaut tel thème. Le détail appartient
+         à la page du thème, et l'y remonter affaiblit les deux. -->
+    <h1 class="hero-h1 rv">Your brand, rendered</h1>
+
+    <div class="rv" style="margin-top:clamp(26px,4vh,40px)">
+      <a class="btn btn--auto" href="themes.html"><span>See all themes</span></a>
+    </div>
+  </div>
+
+  <!-- Le coin bas gauche. Seul : la preuve sociale qui lui faisait face
+       est retirée. La rangée reste en flex avec space-between, donc le
+       badge tient sa position sans qu'on ait rien à recalculer — et le
+       jour où quelque chose revient à droite, il n'y a qu'à l'ajouter.
+
+       ⚠️ CE BADGE EST UNE AFFIRMATION, PAS UNE DÉCORATION.
+       Il dit « je suis inscrit au programme partenaires de Shopify ».
+       Si le compte n'existe pas, supprime ces trois lignes : c'est la
+       seule du site qu'un acheteur — ou Shopify — peut vérifier en une
+       minute. L'inscription est gratuite : partners.shopify.com -->
+  <div class="hero-bas">
+    <img class="hero-badge" src="img/shopify-partners.png" alt="Shopify Partners"
+         draggable="false" width="640" height="192">
+  </div>
+</section>
+
+<!-- ═══ LA COLLECTION, EN TROIS COLONNES ═══
+     Trois places, une seule occupée. C'est volontaire : deux cases vides
+     annoncées « incoming » disent qu'il y aura une suite, là où un thème
+     seul au milieu de la page dirait qu'il n'y a que lui.
+     Quand le deuxième sortira, il n'y a qu'à remplir la colonne 02 —
+     mêmes classes, le gabarit est déjà là. -->
+<section class="edis" style="padding-top:0">
+  <div class="wrap">
+
+    <div class="edis-tete rv">
+      <p class="surtitre">Shopify themes for brands and businesses</p>
+      <h2 class="t-lg" style="margin-top:14px">One theme.<br>More coming.</h2>
+    </div>
+
+    <div class="edis-grille">
+
+      <!-- ─── 01 · Vantage ────────────────────────────────────────── -->
+      <article class="edi edi--ouvert rv">
+        <div class="edi-haut">
+          <span class="edi-n">01</span>
+        </div>
+
+        <a class="edi-vue" href="produit-vantage.html">
+          <img src="img/vantage-boite.png" alt="Vantage — the theme's box"
+               draggable="false" width="760" height="1158">
+        </a>
+
+        <h3 class="edi-titre">Vantage</h3>
+        <!-- ⬇ TON PRIX -->
+        <div class="prix edi-prix">
+          <span class="now">€89</span>
+          <span class="prix-note">€129 later</span></div>
+        <p class="edi-lab">What you get</p>
+        <ul class="edi-liste">
+          <li>A storefront built for a clothing brand</li>
+          <li>Search, cart, accounts, FAQ — no paid apps</li>
+          <li>An illustrated setup guide, included in the price</li>
+        </ul>
+
+        <a class="edi-lien" href="produit-vantage.html">View theme
+          <span aria-hidden="true">↗</span></a>
+      </article>
+
+      <!-- ─── 02 ──────────────────────────────────────────────────── -->
+      <article class="edi rv">
+        <div class="edi-haut">
+          <span class="edi-n">02</span>
+          <span class="edi-etat edi-etat--mute">Incoming</span>
+        </div>
+        <div class="edi-vue edi-vue--vide"><em>Incoming</em></div>
+        <h3 class="edi-titre edi-titre--mute">Incoming</h3>
+        <p class="edi-desc">The second theme. Same engine, another kind of
+           brand on top.</p>
+      </article>
+
+      <!-- ─── 03 ──────────────────────────────────────────────────── -->
+      <article class="edi rv">
+        <div class="edi-haut">
+          <span class="edi-n">03</span>
+          <span class="edi-etat edi-etat--mute">Incoming</span>
+        </div>
+        <div class="edi-vue edi-vue--vide"><em>Incoming</em></div>
+        <h3 class="edi-titre edi-titre--mute">Incoming</h3>
+        <p class="edi-desc">The third. Announced here first, and nowhere
+           else.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Le nom en toutes lettres, dans le coin. L'accueil n'a pas de barre :
+     le sigle occupe le premier écran, et une barre au-dessus de lui
+     dirait deux fois la même chose. Mais le SIGLE seul ne se lit pas —
+     RF ne devient un nom qu'une fois qu'on a lu Renderflow quelque part.
+     Le coin haut gauche est cet endroit-là. -->
+<a class="marque-coin" href="index.html" aria-label="Renderflow">RENDER<span>FLOW</span></a>
+
+<!-- Le compteur du panier. Fixe, à gauche de la pastille du menu : c'est
+     la seule information de la barre qui change en cours de visite. -->
+<a class="hdr-panier" href="#" data-panier-ouvrir data-panier-compteur aria-label="Open cart">
+  <svg class="hdr-panier-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.4 9V6.3a3.6 3.6 0 0 1 7.2 0V9"/><path d="M3.5 9h17l-1 11.2a1.6 1.6 0 0 1-1.6 1.4H6.1a1.6 1.6 0 0 1-1.6-1.4z"/></g><g fill="currentColor"><rect x="7.3" y="12" width="1.4" height="6"/><rect x="7.3" y="12" width="3.4" height="1.3"/><rect x="7.3" y="14.3" width="3.4" height="1.2"/><rect x="9.3" y="12" width="1.4" height="3.5"/><polygon points="9.2,15.4 11.3,18 9.6,18 8.4,15.4"/><rect x="12.9" y="12" width="1.4" height="6"/><rect x="12.9" y="12" width="3.8" height="1.3"/><rect x="12.9" y="14.4" width="2.8" height="1.2"/></g></svg><b>0</b>
+</a>
+
+<!-- ═══ LE TIROIR DU PANIER ═══
+     Il s'ouvre PAR-DESSUS la page, il ne la remplace pas. Ajouter au
+     panier n'est pas une décision d'achat : quelqu'un qui vient d'ajouter
+     un article veut souvent en regarder un autre, et l'envoyer sur une
+     page de panier le sort de ce qu'il faisait. -->
+<div class="tiroir-voile" id="tiroir-voile" hidden></div>
+
+<aside class="tiroir" id="tiroir" aria-hidden="true" aria-label="Cart">
+  <div class="tiroir-tete">
+    <span class="mono">Cart <span data-panier-n>0</span></span>
+    <button class="tiroir-x mono" type="button" data-panier-fermer>Close</button>
+  </div>
+
+  <div class="tiroir-corps" data-panier-lignes></div>
+
+  <div class="tiroir-vide" data-panier-vide>
+    <p>Your cart is empty.</p>
+    <a class="btn btn--auto" href="themes.html"><span>See all themes</span></a>
+  </div>
+
+  <div class="tiroir-pied" data-panier-pied hidden>
+    <div class="tiroir-total">
+      <span class="mono">Subtotal</span>
+      <span class="tiroir-somme" data-panier-total>€0</span>
+    </div>
+    <p class="tiroir-note">Taxes are calculated at checkout.</p>
+    <a class="btn" href="paiement.html"><span>Checkout</span></a>
+    <div class="tiroir-liens">
+      <a class="lien-s mono" href="panier.html">View cart</a>
+      <a class="lien-s mono" href="themes.html">See all themes</a>
+    </div>
+  </div>
+
+  <!-- Hors du pied : celui-ci est masqué tant que le panier est vide, et
+       le nom, lui, doit signer le panneau dans les deux états. -->
+  <div class="logo-mot tiroir-mot" data-ajuster>RENDER<span>FLOW</span></div>
+</aside>
+
+<footer class="pied">
+  <div class="wrap">
+    <div class="pied-cols">
+      <div>
+        <h4>Legal</h4>
+        <ul><li><a href="cgv.html">Terms of service</a></li>
+            <li><a href="remboursement.html">Refund policy</a></li>
+            <li><a href="confidentialite.html">Privacy policy</a></li>
+            <li><a href="licence.html">License agreement</a></li></ul>
+      </div>
+      <div>
+        <h4>Themes</h4>
+        <ul><li><a href="themes.html">All themes</a></li>
+            <li><a href="produit-vantage.html">Vantage</a></li></ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul><li><a href="support.html">Support</a></li></ul>
+      </div>
+      <div class="pied-marque">
+        <div class="logo-mot">RENDER<span>FLOW</span></div>
+        <p>Shopify themes for brands and businesses.</p>
+        <div class="socios">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.3 5 4.5"/></svg></a>
+        </div>
+      </div>
+</div>
+
+    <div class="pied-bas">
+      <!-- ⚠️ En Liquid, ces cases deviennent shop.enabled_payment_types :
+           Shopify dessine les vrais logos des moyens activés. Ici, des
+           cases neutres — on n'affiche pas un logo qu'on n'a pas le
+           droit d'embarquer, ni un moyen qu'on n'accepte pas. -->
+      <div class="paie" aria-label="Payment methods">
+        <span>VISA</span><span>MC</span><span>AMEX</span>
+        <span>PAYPAL</span><span>APPLE</span><span>GPAY</span>
+      </div>
+      <p class="pied-copy">© 2026, Renderflow<br>All rights reserved</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

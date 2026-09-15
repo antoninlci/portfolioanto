@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vantage — Shopify theme for brands and businesses</title>
+<meta name="description" content="A Shopify theme for brands and businesses. One payment, no apps required.">
+<meta property="og:title" content="Vantage — Shopify theme for brands and businesses">
+<meta property="og:description" content="Built for brands and businesses. One payment, no subscription.">
+<script>
+  /* Le voile doit exister AVANT le premier rendu : posé plus tard, on
+     verrait la page d'arrivée une fraction de seconde avant qu'il ne la
+     recouvre. D'où ce script en ligne, et non dans un fichier différé. */
+  (function(){try{
+    if(sessionStorage.getItem('px-transition')==='1')
+      document.documentElement.className+=' px-entree';
+  }catch(e){}})();
+</script>
+<link rel="stylesheet" href="assets/base.css?v=1788625590">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="assets/px.js?v=1788625590" defer></script>
+<script src="assets/site.js?v=1788625590" defer></script>
+<script src="assets/panier.js?v=1788625590" defer></script>
+<script src="assets/avis.js?v=1788625590" defer></script>
+<script src="/demos/demo-guard.js"></script>
+</head>
+<body>
+
+<!-- Le voile de transition. Ses cases sont bâties par px.js. -->
+<div class="px" aria-hidden="true"></div>
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="logo" href="index.html" aria-label="Renderflow — home">
+      <img src="img/logo-rf.png" alt="Renderflow" draggable="false" width="1208" height="672">
+    </a>
+  </div>
+</header>
+
+<!-- ═══ MENU RIDEAU ═══ -->
+<button class="mbtn" id="mbtn" type="button"
+        aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+  <span class="mbtn-mot" aria-hidden="true">Menu</span>
+  <span class="mbtn-x" aria-hidden="true"></span>
+</button>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-in">
+    <nav class="menu-nav" id="menu-nav" aria-label="Main">
+      <div class="menu-tt" aria-hidden="true"></div>
+
+      <div class="menu-l" data-href="index.html">
+        <span class="menu-dot" aria-hidden="true"></span>
+        <a href="index.html">Home</a>
+      </div>
+      <div class="menu-l" data-href="themes.html">
+        <span class="menu-dot" aria-hidden="true"></span>
+        <a href="themes.html">Themes</a>
+      </div>
+      <div class="menu-l" data-href="support.html">
+        <span class="menu-dot" aria-hidden="true"></span>
+        <!-- Support ET Contact disaient la même chose : une question sans
+             réponse. Une seule entrée, une seule page — la FAQ pour ce
+             qui est déjà répondu, le formulaire pour le reste. -->
+        <a href="support.html">Support</a>
+      </div>
+    </nav>
+
+    <!-- Le nom signe le bas du panneau, comme il signe le pied de page.
+         Ici le panneau est clair : RENDER prend le noir du panneau,
+         FLOW garde le violet — la même paire qu'en bas du site, à
+         l'envers du fond. Il vient APRÈS les réseaux : c'est une
+         signature, elle se pose en dernier. -->
+    <div class="menu-bas">
+      <div class="menu-pied">
+        <!-- ⬇ TES RÉSEAUX -->
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">TikTok</a>
+        <!-- ⬇ TON ADRESSE -->
+        <a href="mailto:support@renderflow.shop">support@renderflow.shop</a>
+      </div>
+      <div class="logo-mot menu-mot" data-ajuster>RENDER<span>FLOW</span></div>
+    </div>
+  </div>
+
+  <!-- Le bord courbe. Le viewBox l'étire sur toute la hauteur de la
+       fenêtre ; seul l'attribut « d » est animé, par site.js. -->
+  <svg class="menu-courbe" viewBox="0 0 100 1000" preserveAspectRatio="none"
+       aria-hidden="true" focusable="false">
+    <path id="menu-trace" d="M100 0 L200 0 L200 1000 L100 1000 Q-100 500 100 0"></path>
+  </svg>
+</div>
+
+
+<main class="wrap">
+
+  <div class="pdt">
+    <!-- ═══ GALERIE ═══ -->
+    <div>
+      <div class="gal-vue gal-vue--boite" data-gal-vue>
+        <img src="img/vantage-boite.png" alt="Vantage — the box"
+             draggable="false" width="760" height="1158"></div>
+
+      <!-- Les vignettes. Le script lit l'<img> pour bâtir la grande vue ;
+           celles qui portent data-video y posent un <video> à la place.
+           Le <span> reste dans les deux cas — c'est le nom de l'écran. -->
+      <div class="gal-liste">
+        <!-- data-boite : la grande vue prend alors le format d'un
+             coffret, comme data-tel lui donne celui d'un téléphone. -->
+        <button class="gal-mini" data-gal-mini data-boite type="button" aria-current="true">
+          <img src="img/vantage-boite.png" alt="" draggable="false">
+          <span>Box</span>
+        </button>
+        <button class="gal-mini" data-gal-mini type="button" aria-current="false">
+          <img src="img/vantage-home.jpg" alt="" draggable="false">
+          <span>Home page</span>
+        </button>
+        <button class="gal-mini" data-gal-mini type="button" aria-current="false">
+          <img src="img/vantage-product.jpg" alt="" draggable="false">
+          <span>Product page</span>
+        </button>
+        <button class="gal-mini" data-gal-mini type="button" aria-current="false">
+          <img src="img/vantage-collection.jpg" alt="" draggable="false">
+          <span>Collection</span>
+        </button>
+        <button class="gal-mini" data-gal-mini type="button" aria-current="false">
+          <img src="img/vantage-cart.jpg" alt="" draggable="false">
+          <span>Cart drawer</span>
+        </button>
+        <button class="gal-mini" data-gal-mini type="button" aria-current="false">
+          <img src="img/vantage-menu.jpg" alt="" draggable="false">
+          <span>Menu</span>
+        </button>
+        <button class="gal-mini" data-gal-mini type="button" aria-current="false">
+          <img src="img/vantage-contact.jpg" alt="" draggable="false">
+          <span>Contact</span>
+        </button>
+        <!-- data-tel : cette vidéo se joue DANS un téléphone. -->
+        <button class="gal-mini" data-gal-mini data-video="video/vantage-mobile.mp4"
+                data-tel type="button" aria-current="false">
+          <img src="img/vantage-mobile.jpg" alt="" draggable="false">
+          <span>Mobile</span>
+        </button>
+        <button class="gal-mini" data-gal-mini data-video="video/vantage-tour.mp4"
+                type="button" aria-current="false">
+          <img src="img/vantage-tour.jpg" alt="" draggable="false">
+          <span>Video</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══ ACHAT ═══ -->
+    <div class="buy">
+      <span class="tag">Shopify theme · <b>for brands and businesses</b></span>
+
+      <h1 class="t-lg">Vantage</h1>
+
+      <div class="prix">
+        <!-- ⬇ TON PRIX. Un seul chiffre, pas de prix barré.
+             Un « €149 » rayé en permanence n'est pas une remise, c'est un
+             décor — et en Europe, le prix de référence affiché doit être le
+             plus bas pratiqué dans les 30 jours précédents. Le jour où tu
+             passeras à €129, ce sera une vraie hausse, pas une fausse
+             baisse. -->
+        <span class="now">€89</span>
+        <!-- ⬇ TON PRIX À VENIR. Une hausse annoncée, pas une baisse
+             passée : c'est ce que tu veux dire, et c'est la seule
+             formulation qui n'ait rien à justifier. -->
+        <span class="prix-note">Launch price — €129 later</span>
+      </div>
+
+      <div class="bonus">
+        <div class="bonus-vue">
+          <img src="img/guide.png" alt="" draggable="false" width="560" height="610" loading="lazy">
+        </div>
+        <div>
+          <b>Included</b>
+          <p>The illustrated setup guide and four demo products with their
+             sixteen photos (royalty-free) — the showcase rebuilt in five minutes.</p>
+        </div>
+      </div>
+
+      <!-- Le bouton porte l'article : identifiant, nom, prix EN CENTIMES,
+           vignette et adresse. Le script n'a ainsi rien à deviner, et le
+           jour où tu ajoutes un thème, un bouton de plus suffit.
+           Le prix est un entier : 0,1 + 0,2 ne fait pas 0,3 en binaire,
+           et trois lignes finiraient par afficher un total faux d'un
+           centime. On ne divise qu'à l'affichage. -->
+      <button class="btn" type="button" data-ajouter
+              data-id="vantage"
+              data-nom="Vantage"
+              data-prix="8900"
+              data-image="img/vantage-boite.png"
+              data-url="produit-vantage.html"><span>Add to cart</span></button>
+
+      <div class="garantie">
+        <b>Instant download.</b> The link is emailed the moment the payment
+        clears. One payment, no subscription.
+      </div>
+
+      <div class="checks">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg><span>Instant download access</span></div>
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg><span>One time payment</span></div>
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg><span>Illustrated installation guide</span></div>
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg><span>Lifetime access &amp; updates</span></div>
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg><span>No paid apps required</span></div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-i">
+          <button class="acc-b" type="button"><span>Description</span><i>+</i></button>
+          <div class="acc-p"><div><div class="in">
+            <p>Vantage is built for clothing brands. Every screen is made for the garment: a product page that shows it and nothing else, a collection grid that lets the photography carry the page, and a cart that opens over the page instead of pulling the customer away from what they were looking at.</p>
+            <p>It fits a ten-piece label as well as a full catalogue — collections, search, cart, customer accounts, and a page for everything a store has to say. Sections are added, reordered and removed in the editor, so the shop follows the brand and not the other way round.</p>
+            <p>It ships with its own font, five languages, and no dependency on a paid app. Everything visible is a setting in the Shopify editor.</p>
+          </div></div></div>
+        </div>
+        <div class="acc-i">
+          <button class="acc-b" type="button"><span>How to use</span><i>+</i></button>
+          <div class="acc-p"><div><div class="in">
+            <ul>
+              <li>Buy — the download link is emailed straight away</li>
+              <li>Online Store → Themes → Upload zip file</li>
+              <li>Publish, then follow the illustrated guide once</li>
+            </ul>
+            <p>Twenty minutes in total, and you never touch a line of code.</p>
+          </div></div></div>
+        </div>
+        <div class="acc-i">
+          <button class="acc-b" type="button"><span>License</span><i>+</i></button>
+          <div class="acc-p"><div><div class="in">
+            <p>One licence, one store. Use it on your own brand for as long as
+               you like. You may not resell or redistribute the theme.</p>
+            <p>Need it on several stores? Write to us.</p>
+          </div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ═══ COMMENT ÇA MARCHE ═══
+     Ni fond propre ni filet : cette section prolonge celle du dessus.
+     Le fond et la bordure en faisaient un bandeau à part, alors qu'on
+     lit la suite d'un même propos — on achète, puis on installe. Seul
+     l'espacement les sépare, et c'est assez. -->
+<section>
+  <div class="wrap">
+    <div class="sec-t rv">
+      <p class="surtitre">How does it work?</p>
+      <h2 class="t-lg">Three steps</h2>
+    </div>
+    <div class="pas">
+      <div class="pa rv"><div class="pa-n">01</div><h3 class="t-md">Place your order</h3>
+        <p>Pay once. The ZIP and the guide land in your inbox right away.</p></div>
+      <div class="pa rv"><div class="pa-n">02</div><h3 class="t-md">Set it up</h3>
+        <p>Upload the ZIP in Shopify, publish it, and follow the guide screen by screen.</p></div>
+      <div class="pa rv"><div class="pa-n">03</div><h3 class="t-md">Go live</h3>
+        <p>Your photos, your name, your label. The storefront is yours.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="questions" style="background:var(--bg-2);border-block:1px solid var(--line)">
+  <div class="wrap" style="max-width:900px">
+    <div class="sec-t rv">
+      <p class="surtitre">Before you buy</p>
+      <h2 class="t-lg">Questions</h2>
+    </div>
+    <div class="acc rv">
+      <div class="acc-i">
+        <button class="acc-b" type="button"><span>Do I need a paid app?</span><i>+</i></button>
+        <div class="acc-p"><div><div class="in"><p>No. Search, cart, customer accounts, FAQ, contact and the five languages are built into the theme. Nothing to subscribe to.</p></div></div></div>
+      </div>
+      <div class="acc-i">
+        <button class="acc-b" type="button"><span>How long does it take to set up?</span><i>+</i></button>
+        <div class="acc-p"><div><div class="in"><p>Three clicks to install. About twenty minutes to set up the store around it. The illustrated guide walks through every step with screenshots.</p></div></div></div>
+      </div>
+      <div class="acc-i">
+        <button class="acc-b" type="button"><span>Are the demo products included?</span><i>+</i></button>
+        <div class="acc-p"><div><div class="in"><p>Four products and their photos come with the download, as a CSV to import. A Shopify theme cannot contain products — they live in the store's database, not in the theme. That is true of every theme, Shopify's own included.</p></div></div></div>
+      </div>
+      <div class="acc-i">
+        <button class="acc-b" type="button"><span>Can I add my own products?</span><i>+</i></button>
+        <div class="acc-p"><div><div class="in"><p>As many as you like. The grid follows the real number of products: four items or four hundred, the page grows and pagination appears on its own.</p></div></div></div>
+      </div>
+      <div class="acc-i">
+        <button class="acc-b" type="button"><span>Is the payment secure?</span><i>+</i></button>
+        <div class="acc-p"><div><div class="in"><p>Payment is handled by Shopify's own checkout. We never see your card details.</p></div></div></div>
+      </div>
+      <div class="acc-i">
+        <button class="acc-b" type="button"><span>Any help setting up?</span><i>+</i></button>
+        <div class="acc-p"><div><div class="in"><p>An illustrated setup guide comes with the theme — every step, screen by screen, from the ZIP to a live store. If something still blocks you after that, write to us and we answer.</p></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AVIS ═══
+     ⚠️ SUR CETTE MAQUETTE, les avis sont enregistrés dans le navigateur
+        du visiteur (localStorage). Personne d'autre ne les voit. C'est
+        volontaire : un thème n'a pas de base de données, et cette page
+        sert à décider du DESSIN avant que la vraie boutique prenne le
+        relais.
+
+     Sur Shopify, deux voies, toutes deux prêtes dans le thème :
+       — tu saisis les avis dans l'admin (métaobjets « avis ») : gratuit,
+         aucune application, parfait au début ;
+       — ou une application (Judge.me, offre gratuite) les collecte et
+         relance l'acheteur par courriel — son widget se pose dans la
+         section, à l'endroit que tu choisis.
+-->
+<section class="avis" id="avis">
+  <div class="wrap">
+    <div class="sec-t rv">
+      <p class="surtitre">Customers</p>
+      <h2 class="t-lg">Reviews</h2>
+    </div>
+
+    <div class="avis-tete rv" data-avis-tete hidden>
+      <span class="avis-chiffre" data-avis-moyenne>0.0</span>
+      <span class="etoiles" data-avis-etoiles role="img" aria-label=""></span>
+      <span class="avis-n mono" data-avis-compte>0 reviews</span>
+    </div>
+
+    <div class="avis-liste rv" data-avis-liste></div>
+
+    <div class="avis-vide rv" data-avis-vide>
+      <p class="mono">No reviews yet</p>
+      <p>Vantage has just been released. Be the first to say what you think —
+         the reviews appear here as soon as they come in.</p>
+    </div>
+
+    <div class="avis-form rv">
+      <h3>Leave a review</h3>
+
+      <div class="maquette">
+        <b>Mock-up.</b>
+        On this preview the review is saved in your own browser and nobody
+        else sees it. On the live store, Shopify holds them.
+      </div>
+
+      <form data-avis-form style="margin-top:24px">
+        <p class="mono" style="color:var(--fg-mute);margin-bottom:10px">Your rating</p>
+        <div class="notes">
+        <input type="radio" name="note" id="n5" value="5" checked>
+        <label for="n5" title="5 / 5"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 1.6l2.5 5.4 5.9.7-4.4 4 1.2 5.8L10 14.6 4.8 17.5 6 11.7 1.6 7.7l5.9-.7z" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg></label>
+        <input type="radio" name="note" id="n4" value="4">
+        <label for="n4" title="4 / 5"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 1.6l2.5 5.4 5.9.7-4.4 4 1.2 5.8L10 14.6 4.8 17.5 6 11.7 1.6 7.7l5.9-.7z" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg></label>
+        <input type="radio" name="note" id="n3" value="3">
+        <label for="n3" title="3 / 5"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 1.6l2.5 5.4 5.9.7-4.4 4 1.2 5.8L10 14.6 4.8 17.5 6 11.7 1.6 7.7l5.9-.7z" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg></label>
+        <input type="radio" name="note" id="n2" value="2">
+        <label for="n2" title="2 / 5"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 1.6l2.5 5.4 5.9.7-4.4 4 1.2 5.8L10 14.6 4.8 17.5 6 11.7 1.6 7.7l5.9-.7z" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg></label>
+        <input type="radio" name="note" id="n1" value="1">
+        <label for="n1" title="1 / 5"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 1.6l2.5 5.4 5.9.7-4.4 4 1.2 5.8L10 14.6 4.8 17.5 6 11.7 1.6 7.7l5.9-.7z" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg></label>
+        </div>
+
+        <label class="mono" for="av-nom">Name</label>
+        <input class="champ" type="text" id="av-nom" name="nom" required
+               placeholder="How it should appear">
+
+        <label class="mono" for="av-mail">Email</label>
+        <input class="champ" type="email" id="av-mail" name="mail" required
+               placeholder="you@example.com">
+        <p class="paie-note" style="margin-top:-12px">
+          Never shown. It is only there to check the review comes from a buyer.</p>
+
+        <label class="mono" for="av-texte">Review</label>
+        <textarea class="champ" id="av-texte" name="texte" rows="5" required
+                  placeholder="What you built with it, and how it went."></textarea>
+
+        <button class="btn btn--auto" type="submit"><span>Post review</span></button>
+        <p class="paie-note" data-avis-merci hidden style="margin-top:16px;color:var(--acc-clair)">
+          Thanks — your review is below.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- Le compteur du panier. Fixe, à gauche de la pastille du menu : c'est
+     la seule information de la barre qui change en cours de visite. -->
+<a class="hdr-panier" href="#" data-panier-ouvrir data-panier-compteur aria-label="Open cart">
+  <svg class="hdr-panier-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.4 9V6.3a3.6 3.6 0 0 1 7.2 0V9"/><path d="M3.5 9h17l-1 11.2a1.6 1.6 0 0 1-1.6 1.4H6.1a1.6 1.6 0 0 1-1.6-1.4z"/></g><g fill="currentColor"><rect x="7.3" y="12" width="1.4" height="6"/><rect x="7.3" y="12" width="3.4" height="1.3"/><rect x="7.3" y="14.3" width="3.4" height="1.2"/><rect x="9.3" y="12" width="1.4" height="3.5"/><polygon points="9.2,15.4 11.3,18 9.6,18 8.4,15.4"/><rect x="12.9" y="12" width="1.4" height="6"/><rect x="12.9" y="12" width="3.8" height="1.3"/><rect x="12.9" y="14.4" width="2.8" height="1.2"/></g></svg><b>0</b>
+</a>
+
+<!-- ═══ LE TIROIR DU PANIER ═══
+     Il s'ouvre PAR-DESSUS la page, il ne la remplace pas. Ajouter au
+     panier n'est pas une décision d'achat : quelqu'un qui vient d'ajouter
+     un article veut souvent en regarder un autre, et l'envoyer sur une
+     page de panier le sort de ce qu'il faisait. -->
+<div class="tiroir-voile" id="tiroir-voile" hidden></div>
+
+<aside class="tiroir" id="tiroir" aria-hidden="true" aria-label="Cart">
+  <div class="tiroir-tete">
+    <span class="mono">Cart <span data-panier-n>0</span></span>
+    <button class="tiroir-x mono" type="button" data-panier-fermer>Close</button>
+  </div>
+
+  <div class="tiroir-corps" data-panier-lignes></div>
+
+  <div class="tiroir-vide" data-panier-vide>
+    <p>Your cart is empty.</p>
+    <a class="btn btn--auto" href="themes.html"><span>See all themes</span></a>
+  </div>
+
+  <div class="tiroir-pied" data-panier-pied hidden>
+    <div class="tiroir-total">
+      <span class="mono">Subtotal</span>
+      <span class="tiroir-somme" data-panier-total>€0</span>
+    </div>
+    <p class="tiroir-note">Taxes are calculated at checkout.</p>
+    <a class="btn" href="paiement.html"><span>Checkout</span></a>
+    <div class="tiroir-liens">
+      <a class="lien-s mono" href="panier.html">View cart</a>
+      <a class="lien-s mono" href="themes.html">See all themes</a>
+    </div>
+  </div>
+
+  <!-- Hors du pied : celui-ci est masqué tant que le panier est vide, et
+       le nom, lui, doit signer le panneau dans les deux états. -->
+  <div class="logo-mot tiroir-mot" data-ajuster>RENDER<span>FLOW</span></div>
+</aside>
+
+<footer class="pied">
+  <div class="wrap">
+    <div class="pied-cols">
+      <div>
+        <h4>Legal</h4>
+        <ul><li><a href="cgv.html">Terms of service</a></li>
+            <li><a href="remboursement.html">Refund policy</a></li>
+            <li><a href="confidentialite.html">Privacy policy</a></li>
+            <li><a href="licence.html">License agreement</a></li></ul>
+      </div>
+      <div>
+        <h4>Themes</h4>
+        <ul><li><a href="themes.html">All themes</a></li>
+            <li><a href="produit-vantage.html">Vantage</a></li></ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul><li><a href="support.html">Support</a></li></ul>
+      </div>
+      <div class="pied-marque">
+        <div class="logo-mot">RENDER<span>FLOW</span></div>
+        <p>Shopify themes for brands and businesses.</p>
+        <div class="socios">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.3 5 4.5"/></svg></a>
+        </div>
+      </div>
+</div>
+
+    <div class="pied-bas">
+      <!-- ⚠️ En Liquid, ces cases deviennent shop.enabled_payment_types :
+           Shopify dessine les vrais logos des moyens activés. Ici, des
+           cases neutres — on n'affiche pas un logo qu'on n'a pas le
+           droit d'embarquer, ni un moyen qu'on n'accepte pas. -->
+      <div class="paie" aria-label="Payment methods">
+        <span>VISA</span><span>MC</span><span>AMEX</span>
+        <span>PAYPAL</span><span>APPLE</span><span>GPAY</span>
+      </div>
+      <p class="pied-copy">© 2026, Renderflow<br>All rights reserved</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
