@@ -750,7 +750,7 @@ body {
 
 <!-- ─── NAVBAR ─── -->
 <nav class="navbar">
-  <img src="photos/logo.png" alt="Cincta" class="navbar-logo" onerror="this.style.display='none'">
+  <img src="photos/logo.webp" alt="Cincta" class="navbar-logo" onerror="this.style.display='none'" width="256" height="256">
   <a href="index.html" class="navbar-brand">Cincta</a>
   <a href="products.html" class="navbar-back">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
@@ -770,7 +770,7 @@ body {
 
     <!-- Gallery -->
     <div class="product-gallery">
-      <img src="./photos/img1ring.png" alt="The Ring" class="gallery-main" id="galleryMain">
+      <img src="./photos/img1ring.webp" alt="The Ring" class="gallery-main" id="galleryMain" width="1500" height="2000">
     </div>
 
     <!-- Info -->
@@ -783,9 +783,9 @@ body {
 
       <label class="option-label">Color</label>
       <div class="size-options" id="colorOptions">
-        <button class="size-btn" onclick="selectColor(this, './photos/img1ring.png')">Silver</button>
-        <button class="size-btn" onclick="selectColor(this, './photos/img3ringgold.png')">Gold</button>
-        <button class="size-btn" onclick="selectColor(this, './photos/img2ringrose.png')">Rose Gold</button>
+        <button class="size-btn" onclick="selectColor(this, './photos/img1ring.webp')">Silver</button>
+        <button class="size-btn" onclick="selectColor(this, './photos/img3ringgold.webp')">Gold</button>
+        <button class="size-btn" onclick="selectColor(this, './photos/img2ringrose.webp')">Rose Gold</button>
       </div>
 
       <label class="option-label">Ring Size</label>
@@ -926,7 +926,7 @@ function closeCart() {
 function addToCart() {
   const size = document.querySelector('#sizeOptions .size-btn.active')?.textContent || '7';
   const color = document.querySelector('#colorOptions .size-btn.active')?.textContent || 'Silver';
-  const img = color === 'Rose Gold' ? './photos/img2ringrose.png' : color === 'Gold' ? './photos/img3ringgold.png' : './photos/img1ring.png';
+  const img = color === 'Rose Gold' ? './photos/img2ringrose.webp' : color === 'Gold' ? './photos/img3ringgold.webp' : './photos/img1ring.webp';
   const quantity = parseInt(document.getElementById('qtyValue').textContent);
   const existing = cart.find(i => i.name === 'The Ring' && i.size === size && i.color === color);
 

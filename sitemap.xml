@@ -34,22 +34,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.antoninleclei.com/projects/standia/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/standia/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/standia/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/standia/" />
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.antoninleclei.com/fr/realisations/standia/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/standia/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/standia/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.antoninleclei.com/projects/standia/" />
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.antoninleclei.com/projects/fin210/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.antoninleclei.com/projects/fin210/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.antoninleclei.com/fr/realisations/fin210/" />

@@ -18,10 +18,54 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.48/build/spline-viewer.js"></script>
+    <script>
+      /* Le décor 3D (Spline) pèse ~6,5 Mo et occupe le processeur près d'une
+         seconde : on ne le charge qu'au premier geste du visiteur (souris,
+         toucher, défilement, clavier). D'ici là, <spline-viewer> reste vide
+         derrière le dégradé du hero, et la page est déjà complète. */
+      (function () {
+        var events = ['pointermove', 'pointerdown', 'touchstart', 'wheel', 'scroll', 'keydown'];
+        function load() {
+          events.forEach(function (e) { window.removeEventListener(e, load, true); });
+          var s = document.createElement('script');
+          s.type = 'module';
+          s.src = 'https://unpkg.com/@splinetool/viewer@1.12.48/build/spline-viewer.js';
+          document.head.appendChild(s);
+        }
+        events.forEach(function (e) { window.addEventListener(e, load, { capture: true, passive: true }); });
+      })();
+    </script>
     <!-- Calendly widget -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script>
+      /* Calendly ne se charge qu'au clic sur « réserver » : chargé d'office, il
+         posait un cookie tiers et ralentissait la page (et la page projet qui
+         l'affiche en iframe). Le site appelle Calendly.initPopupWidget : ce
+         relais charge le vrai widget, qui remplace window.Calendly, puis
+         rejoue l'appel. */
+      (function () {
+        var loading = null;
+        function load() {
+          if (loading) return loading;
+          var css = document.createElement('link');
+          css.rel = 'stylesheet';
+          css.href = 'https://assets.calendly.com/assets/external/widget.css';
+          document.head.appendChild(css);
+          loading = new Promise(function (resolve, reject) {
+            var js = document.createElement('script');
+            js.src = 'https://assets.calendly.com/assets/external/widget.js';
+            js.onload = resolve;
+            js.onerror = reject;
+            document.head.appendChild(js);
+          });
+          return loading;
+        }
+        window.Calendly = {
+          initPopupWidget: function (opts) {
+            load().then(function () { window.Calendly.initPopupWidget(opts); });
+          }
+        };
+      })();
+    </script>
     <meta property="og:title" content="CutsInnit Model">
   <meta name="twitter:title" content="CutsInnit Model">
   <meta property="og:description" content="By Antonin Le Cleï / Webdesigner">

@@ -672,6 +672,7 @@ blockquote cite {
 
 .photo-full img {
   width: 100%;
+  height: auto;
   max-height: 75vh;
   object-fit: cover;
   display: block;
@@ -702,6 +703,7 @@ blockquote cite {
 
 .photo-figure img {
   width: 100%;
+  height: auto;
   display: block;
   aspect-ratio: 16 / 10;
   object-fit: cover;
@@ -823,6 +825,7 @@ blockquote cite {
 
 .doc-frame img {
   width: 100%;
+  height: auto;
   display: block;
   max-width: 680px;
   margin: 0 auto;
@@ -955,6 +958,7 @@ blockquote cite {
 
 .social-frame img {
   width: 100%;
+  height: auto;
   display: block;
 }
 

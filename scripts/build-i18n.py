@@ -14,7 +14,7 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = "https://www.antoninleclei.com"
-IMAGE = f"{SITE}/ImageeeA.png"
+IMAGE = f"{SITE}/og-image.jpg"
 
 # ── Page map ────────────────────────────────────────────────────────────────
 # en / fr are file paths; en_url / fr_url are the live URLs (trailingSlash: true).
@@ -23,29 +23,19 @@ PAGES = [
         "en": "index.html", "fr": "fr/index.html",
         "en_url": "/", "fr_url": "/fr/",
         "name_en": "Home", "name_fr": "Accueil",
-        "title_en": "Antonin Le Cleï | Web Designer & Developer in Montreal",
-        "desc_en": "Freelance web designer and front-end developer in Montreal. I design and build high-end websites in Webflow, Shopify and custom code — from brand to launch.",
-        "title_fr": "Antonin Le Cleï | Web Designer & Développeur à Montréal",
-        "desc_fr": "Web designer et développeur front-end freelance à Montréal. Je conçois et développe des sites web haut de gamme en Webflow, Shopify et code sur mesure.",
+        "title_en": "Antonin Le Cleï | Designer & Developer Building with AI",
+        "desc_en": "Designer and developer building with AI. I design, code and ship websites, web apps, SaaS and AI automations — from the first screen to a live product.",
+        "title_fr": "Antonin Le Cleï | Designer & développeur qui construit avec l'IA",
+        "desc_fr": "Designer et développeur qui construit avec l'IA. Je conçois, code et mets en ligne des sites, applications web, SaaS et automatisations IA, du premier écran au produit.",
     },
     {
         "en": "projects/index.html", "fr": "fr/realisations/index.html",
         "en_url": "/projects/", "fr_url": "/fr/realisations/",
         "name_en": "Projects", "name_fr": "Réalisations",
-        "title_en": "Web Design Projects & Case Studies | Antonin Le Cleï",
-        "desc_en": "Selected web design and front-end projects by Antonin Le Cleï — AI voice agents, real estate investment modelling, and custom sites built in Montreal.",
-        "title_fr": "Réalisations & études de cas en création de site web",
-        "desc_fr": "Projets de web design et de développement front-end d'Antonin Le Cleï — agents vocaux IA, modélisation d'investissement immobilier et sites sur mesure.",
-    },
-    {
-        "en": "projects/standia/index.html", "fr": "fr/realisations/standia/index.html",
-        "en_url": "/projects/standia/", "fr_url": "/fr/realisations/standia/",
-        "name_en": "Standia", "name_fr": "Standia",
-        "parent_en": ("Projects", "/projects/"), "parent_fr": ("Réalisations", "/fr/realisations/"),
-        "title_en": "Standia — AI Voice Agents for Inbound Calls | Case Study",
-        "desc_en": "Standia deploys custom AI voice agents that answer business calls 24/7 — appointment booking, FAQs and lead qualification. Case study by Antonin Le Cleï.",
-        "title_fr": "Standia — agents vocaux IA pour appels entrants",
-        "desc_fr": "Standia déploie des agents vocaux IA qui répondent aux appels 24/7 — prise de rendez-vous, FAQ et qualification de prospects. Étude de cas d'Antonin Le Cleï.",
+        "title_en": "Projects & Case Studies | Antonin Le Cleï",
+        "desc_en": "Selected projects and case studies by Antonin Le Cleï — Renderflow, his own Shopify theme store, client websites and a real estate investment model.",
+        "title_fr": "Réalisations & études de cas | Antonin Le Cleï",
+        "desc_fr": "Projets et études de cas d'Antonin Le Cleï — Renderflow, sa propre boutique de thèmes Shopify, des sites clients et un modèle d'investissement immobilier.",
     },
     {
         "en": "projects/fin210/index.html", "fr": "fr/realisations/fin210/index.html",
@@ -61,10 +51,10 @@ PAGES = [
         "en": "experiences/index.html", "fr": "fr/experiences/index.html",
         "en_url": "/experiences/", "fr_url": "/fr/experiences/",
         "name_en": "Experience", "name_fr": "Expériences",
-        "title_en": "Experience | Antonin Le Cleï, Web Designer in Montreal",
-        "desc_en": "The professional path of Antonin Le Cleï — web design internships, agency work and freelance front-end development in Montreal.",
-        "title_fr": "Expériences | Antonin Le Cleï, Web Designer à Montréal",
-        "desc_fr": "Le parcours professionnel d'Antonin Le Cleï — stages en web design, expérience en agence et développement front-end freelance à Montréal.",
+        "title_en": "Experience | Antonin Le Cleï, Designer & Developer",
+        "desc_en": "The professional path of Antonin Le Cleï — agency work, web design and development, and AI-assisted automation.",
+        "title_fr": "Expériences | Antonin Le Cleï, designer & développeur",
+        "desc_fr": "Le parcours professionnel d'Antonin Le Cleï — travail en agence, design et développement web, et automatisations assistées par IA.",
     },
     {
         "en": "experiences/digitad/index.html", "fr": "fr/experiences/digitad/index.html",
@@ -132,10 +122,10 @@ PAGES = [
         "en": "documents/index.html", "fr": "fr/documents/index.html",
         "en_url": "/documents/", "fr_url": "/fr/documents/",
         "name_en": "CV & Documents", "name_fr": "CV & documents",
-        "title_en": "CV & Documents | Antonin Le Cleï, Web Designer",
-        "desc_en": "Download the resume of Antonin Le Cleï in French and English — freelance web designer and front-end developer based in Montreal.",
-        "title_fr": "CV & documents | Antonin Le Cleï, Web Designer",
-        "desc_fr": "Téléchargez le CV d'Antonin Le Cleï en français et en anglais — web designer et développeur front-end freelance basé à Montréal.",
+        "title_en": "CV & Documents | Antonin Le Cleï, Designer & Developer",
+        "desc_en": "Download the resume of Antonin Le Cleï in French and English — designer and developer building websites, web apps and AI automations.",
+        "title_fr": "CV & documents | Antonin Le Cleï, designer & développeur",
+        "desc_fr": "Téléchargez le CV d'Antonin Le Cleï en français et en anglais — designer et développeur : sites, applications web et automatisations IA.",
     },
 ]
 
@@ -400,41 +390,26 @@ def fr_home(h):
     ]:
         h = h.replace(a, b)
     h = h.replace(
-        """Turning brand identity into immersive
-digital journeys. I create meaningful
-experiences that people don't just use,
-they remember.""",
-        """Transformer une identité de marque en
-parcours numériques immersifs. Je crée des
-expériences que l'on ne fait pas qu'utiliser,
-on s'en souvient.""")
+        """Websites, web apps and AI automations,
+designed and built end to end.
+Products that look sharp, load fast
+and keep working for you and you only.""",
+        """Sites, applis web et automatisations IA,
+conçus et développés de A à Z.
+Des produits soignés, rapides,
+qui travaillent pour vous, et vous seul.""")
     h = h.replace("[SCROLL TO EXPLORE]", "[DÉFILEZ POUR EXPLORER]")
     h = h.replace('aria-hidden="true">About</h2>', 'aria-hidden="true">À propos</h2>')
     h = h.replace('<span id="portal-about">About</span>', '<span id="portal-about">À propos</span>')
-    h = swap_text(h, "p", "Freelance web designer & front-end developer based in Montreal",
-                  "Web designer et développeur front-end freelance basé à Paris. "
-                  "Je conçois, développe et mets en ligne des sites web complets — de l'identité "
-                  "de marque au produit optimisé et en production — pour des startups, des agences "
-                  "et des marques créatives.")
-    h = swap_text(h, "h3", "AI-Driven Design", "Design & direction artistique assistés par IA")
-    h = swap_text(h, "p", "I design premium interfaces",
-                  "Je conçois des interfaces haut de gamme et des visuels de marque, en m'appuyant "
-                  "sur Claude et les outils IA que je maîtrise pour passer du concept à une interface "
-                  "aboutie sans rien perdre du métier. Un travail original et fidèle à la marque — "
-                  "produit vite et avec intention.")
-    h = swap_text(h, "h3", "Webflow, Shopify & Front-End Build", "Développement Webflow, Shopify & front-end")
-    h = swap_text(h, "p", "I build and ship production sites",
-                  "Je développe et mets en production des sites Webflow — structurés et industrialisés "
-                  "avec Relume — des boutiques Shopify pour l'e-commerce, et des front-ends codés à la "
-                  "main quand le projet l'exige. Des mises en page au pixel près, animées avec GSAP et "
-                  "d'autres librairies d'animation.")
-    h = swap_text(h, "h3", "SEO, Meta & Conversion", "SEO, métadonnées & conversion")
-    h = swap_text(h, "p", "Technical SEO, correctly configured",
-                  "SEO technique, balises meta et données structurées correctement configurées, et des "
-                  "choix orientés conversion à chaque étape du projet. Votre site se positionne, "
-                  "s'affiche proprement au partage, et transforme le trafic en vrais clients.")
+    h = swap_text(h, "p", "Designer and developer building with AI", "Designer et développeur qui construit avec l'IA. Je conçois, code et mets en ligne des sites, des applications web et des automatisations — du premier écran au produit en ligne — pour des fondateurs, des petites entreprises et des agences.")
+    h = swap_text(h, "h3", "Websites & Storefronts", "Sites & boutiques en ligne")
+    h = swap_text(h, "p", "I design and build premium sites", "Je conçois et développe des sites haut de gamme en Webflow, Shopify et code sur mesure, avec des animations GSAP et de la 3D quand elles servent la marque. Le SEO, les métadonnées et la performance font partie du travail, pas d'une retouche à la fin.")
+    h = swap_text(h, "h3", "Web Apps & SaaS", "Applications web & SaaS")
+    h = swap_text(h, "p", "I turn an idea into a working product", "Je transforme une idée en produit qui fonctionne : interface, base de données, comptes, paiements. J'ai créé et je vends ma propre boutique de thèmes Shopify, Renderflow, et je développe avec Claude, Codex, Supabase et GitHub.")
+    h = swap_text(h, "h3", "AI Automation", "Automatisation IA")
+    h = swap_text(h, "p", "I find the repetitive work", "Je repère le travail répétitif d'une entreprise et je le confie à des automatisations et des agents IA construits avec n8n et Claude : gestion des prospects, contenu, rapports, outils internes. Moins de travail manuel, des réponses plus rapides.")
     h = swap_text(h, "h2", "03 — Archive", "03 — Archives")
-    h = h.replace('aria-label="Concordia Student Project"', 'aria-label="Projet étudiant Concordia"')
+    h = h.replace('aria-label="Concordia Project"', 'aria-label="Projet Concordia"')
     h = swap_text(h, "h3", "Concordia Project", "Projet Concordia")
     for a, b in [("[ APRIL 2026 ]", "[ AVRIL 2026 ]"), ("[ MARCH 2026 ]", "[ MARS 2026 ]"),
                  ("[ FEBRUARY 2026 ]", "[ FÉVRIER 2026 ]"), ("[ JANUARY 2026 ]", "[ JANVIER 2026 ]")]:
@@ -446,10 +421,10 @@ on s'en souvient.""")
     # ProfilePage JSON-LD describes the French page now
     h = h.replace('"url": "https://www.antoninleclei.com/",\n    "mainEntity"',
                   '"url": "https://www.antoninleclei.com/fr/",\n    "mainEntity"')
-    h = h.replace('"jobTitle": "Web Designer & Front-End Developer",',
-                  '"jobTitle": "Web Designer & Développeur Front-End",')
-    h = h.replace('"knowsAbout": ["Web Design", "Front-End Development", "UI/UX Design",',
-                  '"knowsAbout": ["Web Design", "Développement Front-End", "Design UI/UX",')
+    h = h.replace('"jobTitle": "Designer & Developer",',
+                  '"jobTitle": "Designer & développeur",')
+    h = h.replace('"knowsAbout": ["Web Design", "Web Development", "Web Applications", "SaaS", "AI Automation", "n8n", "Supabase", "Webflow", "Shopify", "GSAP Animation", "SEO"]',
+                  '"knowsAbout": ["Web design", "Développement web", "Applications web", "SaaS", "Automatisation IA", "n8n", "Supabase", "Webflow", "Shopify", "Animation GSAP", "SEO"]')
     return h
 
 
@@ -463,34 +438,6 @@ def fr_projects(h):
                   "Analyse d'un immeuble à revenus multilogements.")
     h = h.replace("View Project", "Voir le projet")
     h = h.replace('data-cursor-marquee-text="View Project"', 'data-cursor-marquee-text="Voir le projet"')
-    return h
-
-
-def fr_standia(h):
-    # the status badge is a bare text node, not wrapped in its own tag
-    h = h.replace("</span>\n        In Progress\n", "</span>\n        En cours\n")
-    h = h.replace(">In Progress<", ">En cours<")
-    for a, b in [(">Status<", ">Statut<"), (">Year<", ">Année<"), (">Location<", ">Lieu<"),
-                 (">Montreal<", ">Montréal<"), (">AI Agency<", ">Agence IA<"),
-                 ("— AI Agency", "— Agence IA"), ("Project details", "Détails du projet"),
-                 (">Coming<", ">Bientôt<"), (">Soon<", ">disponible<")]:
-        h = h.replace(a, b)
-    h = swap_text(h, "p", "Standia is an AI agency built around one core idea",
-                  "Standia est une agence IA construite autour d'une idée simple : votre téléphone ne "
-                  "devrait jamais sonner dans le vide. Nous déployons des agents vocaux IA sur mesure "
-                  "qui prennent les appels entrants pour le compte des entreprises — cabinets dentaires, "
-                  "salles de sport, cabinets d'avocats, entreprises de services — toute organisation qui "
-                  "perd de la valeur dès qu'un appel bascule sur la boîte vocale ou qu'aucune "
-                  "réceptionniste n'est disponible.")
-    h = swap_text(h, "p", "Each agent is trained on the client",
-                  "Chaque agent est entraîné sur les processus propres au client : prise de rendez-vous, "
-                  "réponses aux questions fréquentes, qualification des prospects, transfert des appels "
-                  "urgents à la bonne personne. Le résultat : une expérience d'appel fluide, disponible "
-                  "24 h/24 et 7 j/7, pour une fraction du coût d'une réceptionniste.")
-    h = swap_text(h, "p", "Standia is currently in active development",
-                  "Standia est en développement actif. Plus de détails, des études de cas et l'offre "
-                  "complète seront disponibles prochainement.")
-    h = swap_text(h, "p", "Full case study", "Étude de cas complète & détails du produit — bientôt en ligne.")
     return h
 
 
@@ -765,7 +712,6 @@ TRANSLATORS = {
     "projects/stingers/index.html": fr_stingers,
     "projects/cutsinnit/index.html": fr_cutsinnit,
     "projects/index.html": fr_projects,
-    "projects/standia/index.html": fr_standia,
     "projects/fin210/index.html": fr_fin210,
     "experiences/index.html": fr_experiences,
     "experiences/digitad/index.html": fr_digitad,

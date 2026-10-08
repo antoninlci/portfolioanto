@@ -318,17 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tl.from('.hero-title-line', { yPercent: 110, opacity: 0, stagger: 0.1, duration: 1.4 }, 0);
 
-    const introText = document.querySelector('.hero-intro-text');
-    if (introText) {
-      const raw = introText.innerHTML;
-      introText.innerHTML = raw.replace(/([^\s<]+)/g, w =>
-        w.startsWith('<') ? w :
-        `<span class="ww" style="display:inline-block;overflow:hidden;vertical-align:bottom"><span class="wi" style="display:inline-block">${w}</span></span>`
-      );
-      tl.from(introText.querySelectorAll('.wi'), {
-        yPercent: 100, opacity: 0, stagger: 0.022, duration: 0.8
-      }, 0.4);
-    }
+    // Texte d'intro : découpé et animé en CSS dès le HTML (voir index.html).
 
     tl.from('.hero-scroll-cta', { opacity: 0, y: 8, duration: 0.6 }, 1.1);
     tl.from('.hero-thumb', { clipPath: 'inset(0 0 100% 0)', stagger: 0.08, duration: 0.95 }, 0.5);
@@ -343,6 +333,10 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollTrigger: {
       trigger:      '#hero',
       pin:          true,
+      // Conteneur d'épinglage fourni dans le HTML : sans lui, GSAP déplace
+      // #hero dans un nouveau div, ce qui force à redessiner tout le haut de
+      // page après le JS et retardait la mesure d'affichage (LCP).
+      pinSpacer:    '.hero-pin-spacer',
       pinSpacing:   true,
       scrub:        1,
       start:        'top top',
@@ -685,6 +679,20 @@ document.addEventListener('DOMContentLoaded', () => {
       else jump();
     });
   });
+
+  // Vidéos Work et Archive : preload="none" dans le HTML pour ne rien
+  // télécharger au premier affichage. Quand on approche de leur section, on
+  // charge au moins leurs métadonnées pour que la lecture démarre vite.
+  if ('IntersectionObserver' in window) {
+    const warm = new IntersectionObserver((entries) => {
+      entries.forEach(({ isIntersecting, target }) => {
+        if (!isIntersecting) return;
+        warm.unobserve(target);
+        target.querySelectorAll('video[preload="none"]').forEach(v => { v.preload = 'auto'; });
+      });
+    }, { rootMargin: '100% 0px' });
+    ['work', 'archive'].forEach(id => { const el = document.getElementById(id); if (el) warm.observe(el); });
+  }
 
   // Freeze glow background videos at frame 0
   document.querySelectorAll('.work-panel-glow video').forEach(v => {

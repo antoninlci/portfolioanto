@@ -1,3 +1,151 @@
+/* Polices auto-hébergées (copie des fichiers Google Fonts, sous-ensembles
+   latin et latin-ext). Servies par le site lui-même : plus de connexion à
+   fonts.googleapis.com / fonts.gstatic.com qui bloquait le premier rendu. */
+/* Playfair Display italic 400 — latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/playfair-display-italic-a9bc00-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Playfair Display italic 400 — latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/playfair-display-italic-ef5ca8-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Playfair Display italic 700 — latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/playfair-display-italic-a9bc00-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Playfair Display italic 700 — latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/playfair-display-italic-ef5ca8-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Playfair Display normal 700 — latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/playfair-display-normal-f556cd-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Playfair Display normal 700 — latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/playfair-display-normal-9deeae-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Playfair Display normal 900 — latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(/fonts/playfair-display-normal-f556cd-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Playfair Display normal 900 — latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(/fonts/playfair-display-normal-9deeae-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Space Mono italic 400 — latin-ext */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/space-mono-italic-f078fa-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Space Mono italic 400 — latin */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/space-mono-italic-25719f-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Space Mono italic 700 — latin-ext */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/space-mono-italic-a09d40-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Space Mono italic 700 — latin */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/space-mono-italic-287b4c-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Space Mono normal 400 — latin-ext */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/space-mono-normal-d4ba38-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Space Mono normal 400 — latin */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/space-mono-normal-391873-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Space Mono normal 700 — latin-ext */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/space-mono-normal-8a2467-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Space Mono normal 700 — latin */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/space-mono-normal-df899b-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* ================================================================
    ANTONIN LE CLEÏ — style.css v3
    Δ Changes from v2:
@@ -58,24 +206,8 @@ html.t-cover .transition__shutter {
 ──────────────────────────────────────────────────────────────── */
 @font-face {
   font-family: 'Canela-ThinItalic-Trial';
-  src: url('Canela-ThinItalic-Trial.otf') format('opentype');
+  src: url('/fonts/canela-thin-italic.woff2') format('woff2');
   font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Danymeka';
-  src: url('Danymeka-DEMO.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Danymeka';
-  src: url('Danymeka-Italic-DEMO.otf') format('opentype');
-  font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
@@ -150,6 +282,7 @@ ul, ol { list-style: none; }
 }
 
 .ui-header.on-light .ui-name,
+.ui-header.on-light .ui-linkedin,
 .ui-header.on-light .ui-role,
 .ui-header.on-light .ui-time,
 .ui-header.on-light .ui-date { color: #1a1a1a; }
@@ -180,6 +313,37 @@ ul, ol { list-style: none; }
   align-items: flex-end;
   gap: 0.1em;
 }
+
+/* Lien LinkedIn sous « Digital Designer » : même typo et même roulement de
+   lettres au survol que le nom. */
+.ui-linkedin {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+  cursor: none;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.1em;
+  align-self: flex-start;
+}
+
+/* Logo LinkedIn (Simple Icons) en noir et blanc : carré noir, « in » blanc.
+   Sur fond sombre (en-tête en texte clair), il s'inverse pour rester visible. */
+.ui-linkedin-icon {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.45em;
+  align-self: center;
+}
+.ui-linkedin-sq { fill: #ffffff; }
+.ui-linkedin-in { fill: #0a0a0a; }
+.ui-header.on-light .ui-linkedin-sq { fill: #000000; }
+.ui-header.on-light .ui-linkedin-in { fill: #ffffff; }
 
 .ui-role {
   font-family: var(--font-mono);
@@ -250,6 +414,7 @@ ul, ol { list-style: none; }
   align-items: center;
   gap: 5px;
   padding: 5px 8px;
+  min-height: 24px;          /* taille de cible minimale (WCAG 2.5.8) */
   transition: color var(--dur-fast);
   position: relative;
   border-radius: 4px;
@@ -308,12 +473,14 @@ ul, ol { list-style: none; }
 
 .nav-link:hover .nav-char-top,
 .ui-name:hover .nav-char-top,
+.ui-linkedin:hover .nav-char-top,
 .hero-projects-cta:hover .nav-char-top,
 .hero-experiences-cta:hover .nav-char-top,
 .projects-back:hover .nav-char-top { transform: translateY(-110%); }
 
 .nav-link:hover .nav-char-bot,
 .ui-name:hover .nav-char-bot,
+.ui-linkedin:hover .nav-char-bot,
 .hero-projects-cta:hover .nav-char-bot,
 .hero-experiences-cta:hover .nav-char-bot,
 .projects-back:hover .nav-char-bot { transform: translateY(0%); }
@@ -447,8 +614,11 @@ ul, ol { list-style: none; }
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) translateZ(0);
-  width: clamp(500px, 70vw, 1000px);
+  /* La vidéo est recadrée sur le A (1112 px pris sur une image de 1920, un
+     peu à gauche du centre) : la largeur et le décalage gardent le A à la
+     même taille et à la même place qu'avec l'image 16:9 d'origine. */
+  transform: translate(-52.5%, -50%) translateZ(0);
+  width: clamp(290px, 40.5vw, 579px);
   z-index: 1;
   pointer-events: none;
   user-select: none;
@@ -456,9 +626,36 @@ ul, ol { list-style: none; }
   backface-visibility: hidden;
 }
 
+/* Image fixe du A (première image de la vidéo) : elle s'affiche tout de
+   suite et sert d'élément principal pour le chargement. La vidéo est posée
+   exactement dessus et n'apparaît qu'une fois en lecture (.is-playing). */
+.hero-logo .logo-a-still {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 0.35s ease;
+}
+/* La vidéo est transparente : sans ça, on verrait le A fixe à travers le A
+   qui tourne. Fondu croisé entre les deux quand la lecture démarre. */
+.hero-logo.is-playing .logo-a-still { opacity: 0; }
+.hero-logo video {
+  position: absolute;
+  /* 1,5 % plus petite que l'image fixe : Chrome compte un élément qui
+     apparaît comme nouveau « plus grand élément » (LCP) dès qu'il est au
+     moins aussi grand que le précédent. Plus petite, la vidéo ne repousse
+     pas la mesure ; le fondu masque l'écart. */
+  top: 0.75%;
+  left: 0.75%;
+  width: 98.5% !important;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.hero-logo video.is-playing { opacity: 1; }
+
 .hero-logo video {
   width: 100%;
   height: auto;
+  aspect-ratio: 1160 / 1094;
   display: block;
   pointer-events: none;
 }
@@ -513,6 +710,18 @@ ul, ol { list-style: none; }
   text-align: left;
   white-space: pre-line;
 }
+
+/* Mots du texte d'intro, découpés par un script en ligne juste après le <p>.
+   Même entrée qu'avant (montée + fondu, 22 ms d'écart, expo.out) mais en CSS,
+   pour qu'elle démarre au premier affichage. */
+.hero-intro-text .ww { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.hero-intro-text .wi {
+  display: inline-block;
+  animation: hero-word-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(0.25s + var(--i, 0) * 22ms);
+}
+@keyframes hero-word-in { from { transform: translateY(100%); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .hero-intro-text .wi { animation: none; } }
 
 /* [SCROLL TO EXPLORE] — brackets included in HTML, left-aligned */
 .hero-scroll-cta {
@@ -1163,8 +1372,8 @@ a.work-panel-info-main {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(600px, 90vw, 1200px);
+  transform: translate(-52.5%, -50%);   /* recadrage du A : voir .hero-logo */
+  width: clamp(348px, 52.1vw, 695px);
   opacity: 0.08;
   pointer-events: none;
   user-select: none;
@@ -1377,6 +1586,7 @@ a.work-panel-info-main {
   .ui-header-time { text-align: right; flex-shrink: 0; }
   .ui-name { font-size: 9px; }
   .ui-role { font-size: 9px; }
+  .ui-linkedin { font-size: 9px; }
   .ui-time { font-size: 9px; white-space: nowrap; }
   .ui-date { font-size: 9px; white-space: nowrap; }
   .contact-title { font-size: 40px; }
@@ -1616,3 +1826,29 @@ a.work-panel-info-main {
   .typo-scroll__media.is--2-3,
   .typo-scroll__media.is--1-1 { width: 88vw; aspect-ratio: 16 / 9; }
 }
+
+/* Pages Expériences : fond blanc. Les jetons sont redéfinis sur le body, si
+   bien que tout ce qui lit var(--bg) ou var(--text) bascule d'un coup. Les
+   cartes du tornado gardent leur fond sombre. Le curseur est en
+   mix-blend-mode: difference : il devient noir tout seul sur ce fond. */
+body.page-light {
+  --bg:         #ffffff;
+  --text:       #111111;
+  --text-muted: #6b6b6b;
+  --border:     rgba(0, 0, 0, 0.1);
+  --accent:     #6a46f5;   /* #7c5cff n'atteint que 4.3:1 sur blanc */
+}
+
+/* Conteneur d'épinglage du haut de page (voir pinSpacer dans app.js). GSAP y
+   ajoute une marge basse égale à la durée de l'épinglage (end: '+=150%', soit
+   150 % de la hauteur d'écran) : on la réserve dès le départ pour que rien ne
+   bouge quand le JS s'exécute. */
+/* Avant que GSAP le prenne en charge (classe .pin-spacer), le conteneur porte
+   aussi le débord pleine largeur de #hero (marge négative sous le menu), que
+   GSAP y reporte ensuite lui-même. */
+.hero-pin-spacer:not(.pin-spacer) {
+  padding-bottom: 150vh;
+  margin-left: calc(-1 * var(--nav-w));
+  width: 100vw;
+}
+.hero-pin-spacer:not(.pin-spacer) > #hero { margin-left: 0; }

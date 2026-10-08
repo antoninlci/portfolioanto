@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Expériences | Antonin Le Cleï, Web Designer</title>
-  <meta name="description" content="Le parcours professionnel d'Antonin Le Cleï — stages en web design, expérience en agence et développement front-end freelance." />
+  <title>Expériences | Antonin Le Cleï, designer &amp; développeur</title>
+  <meta name="description" content="Le parcours professionnel d'Antonin Le Cleï — travail en agence, design et développement web, et automatisations assistées par IA." />
   <meta name="author" content="Antonin Le Cleï" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.antoninleclei.com/fr/experiences/" />
@@ -19,16 +19,16 @@
   <meta property="og:site_name" content="Antonin Le Cleï" />
   <meta property="og:locale" content="fr_CA" />
   <meta property="og:locale:alternate" content="en_CA" />
-  <meta property="og:title" content="Expériences | Antonin Le Cleï, Web Designer" />
-  <meta property="og:description" content="Le parcours professionnel d'Antonin Le Cleï — stages en web design, expérience en agence et développement front-end freelance." />
+  <meta property="og:title" content="Expériences | Antonin Le Cleï, designer &amp; développeur" />
+  <meta property="og:description" content="Le parcours professionnel d'Antonin Le Cleï — travail en agence, design et développement web, et automatisations assistées par IA." />
   <meta property="og:url" content="https://www.antoninleclei.com/fr/experiences/" />
-  <meta property="og:image" content="https://www.antoninleclei.com/ImageeeA.png" />
+  <meta property="og:image" content="https://www.antoninleclei.com/og-image.jpg" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Expériences | Antonin Le Cleï, Web Designer" />
-  <meta name="twitter:description" content="Le parcours professionnel d'Antonin Le Cleï — stages en web design, expérience en agence et développement front-end freelance." />
-  <meta name="twitter:image" content="https://www.antoninleclei.com/ImageeeA.png" />
+  <meta name="twitter:title" content="Expériences | Antonin Le Cleï, designer &amp; développeur" />
+  <meta name="twitter:description" content="Le parcours professionnel d'Antonin Le Cleï — travail en agence, design et développement web, et automatisations assistées par IA." />
+  <meta name="twitter:image" content="https://www.antoninleclei.com/og-image.jpg" />
   <script type="application/ld+json" data-seo>
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
       {"@type":"ListItem","position":1,"name":"Accueil","item":"https://www.antoninleclei.com/fr/"},
@@ -38,18 +38,17 @@
   <link rel="icon" type="image/png" href="/favicon-circle.png" />
   <link rel="apple-touch-icon" href="/favicon-circle.png" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/fonts/space-mono-normal-df899b-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/playfair-display-italic-ef5ca8-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Observer.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <link rel="stylesheet" href="/style.css" />
+  <script src="/vendor/gsap.min.js" defer></script>
+  <script src="/vendor/Observer.min.js" defer></script>
+  <script src="/vendor/ScrollTrigger.min.js" defer></script>
+  <link rel="stylesheet" href="/style.css?v=7" />
   <script>try{if(sessionStorage.getItem('shutterNav'))document.documentElement.classList.add('t-cover');}catch(e){}</script>
-  <script src="/transition.js" defer></script>
-  <script src="/tornado.js" defer></script>
-  <script src="/cursor-marquee.js" defer></script>
+  <script src="/transition.js?v=7" defer></script>
+  <script src="/tornado.js?v=7" defer></script>
+  <script src="/cursor-marquee.js?v=7" defer></script>
 
   <style>
     body { background: var(--bg); color: var(--text); }
@@ -181,6 +180,10 @@
       perspective: 75em;
       transform-style: preserve-3d;
       position: relative;
+      /* Les cartes reculent en z derrière le plan de cette liste : sans ça,
+         c'est la liste qui reçoit le clic, pas la carte visée. Le glisser
+         passe par window et n'en a pas besoin. */
+      pointer-events: none;
     }
     .cards-tornado__item {
       transform-style: preserve-3d;
@@ -197,7 +200,7 @@
       pointer-events: none;
       -webkit-user-select: none;
       user-select: none;
-      background-color: #161616;
+      background-color: #ecebe8;
       border-radius: 1em;
       width: 18em;
       position: relative;
@@ -216,13 +219,14 @@
     /* experience card content */
     .exp-card {
       pointer-events: auto;          /* enable hover detection (drag still via window Observer) */
-      cursor: none;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 1.2em 2.4em rgba(0,0,0,0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 1.4em;
-      background: linear-gradient(160deg, #1a1a1a 0%, #0e0e0e 100%);
+      background: linear-gradient(160deg, #f4f3f1 0%, #e6e5e2 100%);
+      cursor: none;
     }
     .exp-card--link { text-decoration: none; color: inherit; }
 
@@ -243,7 +247,7 @@
       object-fit: cover;
       border-radius: 0.6em;
       overflow: hidden;
-      box-shadow: 0 1.2em 2.6em rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0.8em 1.8em rgba(0, 0, 0, 0.18);
       pointer-events: auto;
     }
     .exp-card__period {
@@ -260,7 +264,7 @@
       font-weight: 700;
       line-height: 1.1;
       margin: 0 0 0.4em;
-      color: #f0f0f0;
+      color: #111;
     }
     .exp-card__company {
       font-family: var(--font-mono);
@@ -331,7 +335,7 @@
     }
   </style>
 </head>
-<body>
+<body class="page-light">
 
   <!-- Page transition shutters -->
   <div data-transition-wrap class="transition" aria-hidden="true">
@@ -348,10 +352,11 @@
     </div>
   </div>
 
-  <div class="ui-header">
+  <div class="ui-header on-light">
     <div class="ui-header-name">
       <a href="/fr/" class="ui-name"><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">A</span><span class="nav-char-bot" style="transition-delay:0s">A</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.02s">N</span><span class="nav-char-bot" style="transition-delay:.02s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.04s">T</span><span class="nav-char-bot" style="transition-delay:.04s">T</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.06s">O</span><span class="nav-char-bot" style="transition-delay:.06s">O</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.08s">N</span><span class="nav-char-bot" style="transition-delay:.08s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.10s">I</span><span class="nav-char-bot" style="transition-delay:.10s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.12s">N</span><span class="nav-char-bot" style="transition-delay:.12s">N</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.14s">L</span><span class="nav-char-bot" style="transition-delay:.14s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.16s">E</span><span class="nav-char-bot" style="transition-delay:.16s">E</span></span><span class="nav-char-space"></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.18s">C</span><span class="nav-char-bot" style="transition-delay:.18s">C</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.20s">L</span><span class="nav-char-bot" style="transition-delay:.20s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.22s">E</span><span class="nav-char-bot" style="transition-delay:.22s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:.24s">Ï</span><span class="nav-char-bot" style="transition-delay:.24s">Ï</span></span></a>
-      <span class="ui-role">DIGITAL DESIGNER</span>
+      <span class="ui-role">DESIGNER &amp; DEVELOPER</span>
+      <a href="https://www.linkedin.com/in/antonin-le-cle%C3%AF-0749b1301/" class="ui-linkedin" target="_blank" rel="noopener me" aria-label="LinkedIn (nouvel onglet)"><svg class="ui-linkedin-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" focusable="false"><path class="ui-linkedin-sq" d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/><path class="ui-linkedin-in" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg><span class="nav-char"><span class="nav-char-top" style="transition-delay:0s">L</span><span class="nav-char-bot" style="transition-delay:0s">L</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:0.02s">I</span><span class="nav-char-bot" style="transition-delay:0.02s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:0.04s">N</span><span class="nav-char-bot" style="transition-delay:0.04s">N</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:0.06s">K</span><span class="nav-char-bot" style="transition-delay:0.06s">K</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:0.08s">E</span><span class="nav-char-bot" style="transition-delay:0.08s">E</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:0.10s">D</span><span class="nav-char-bot" style="transition-delay:0.10s">D</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:0.12s">I</span><span class="nav-char-bot" style="transition-delay:0.12s">I</span></span><span class="nav-char"><span class="nav-char-top" style="transition-delay:0.14s">N</span><span class="nav-char-bot" style="transition-delay:0.14s">N</span></span></a>
     </div>
     <div class="ui-header-time">
       <span class="ui-time" id="clockTime">--:-- --</span>
@@ -377,7 +382,7 @@
   </main>
 
   <!-- 3D Cards Tornado — each card is an experience -->
-  <div data-3d-tornado-init class="cards-tornado">
+  <div data-3d-tornado-init data-back-darkness="0.18" class="cards-tornado">
     <div class="cards-tornado__collection">
       <div data-3d-tornado-list class="cards-tornado__list">
 
@@ -387,7 +392,7 @@
             <img src="/favicon-digitad.svg" alt="Digitad" loading="lazy" class="exp-card__logo" data-cursor-marquee-text="Digitad" />
             <div class="exp-card__body">
               <p class="exp-card__period">Juin 2026</p>
-              <h3 class="exp-card__role">Stage en web design</h3>
+              <h2 class="exp-card__role">Stage en web design</h2>
               <p class="exp-card__company">Digitad · Montréal</p>
             </div>
           </a>
@@ -398,7 +403,7 @@
             <span class="exp-card__num">02</span>
             <div class="exp-card__body">
               <p class="exp-card__period">2023 — 2024</p>
-              <h3 class="exp-card__role">Intitulé du poste</h3>
+              <h2 class="exp-card__role">Intitulé du poste</h2>
               <p class="exp-card__company">Entreprise · Lieu</p>
             </div>
           </div>
@@ -409,7 +414,7 @@
             <span class="exp-card__num">03</span>
             <div class="exp-card__body">
               <p class="exp-card__period">2022 — 2023</p>
-              <h3 class="exp-card__role">Intitulé du poste</h3>
+              <h2 class="exp-card__role">Intitulé du poste</h2>
               <p class="exp-card__company">Entreprise · Lieu</p>
             </div>
           </div>
@@ -420,7 +425,7 @@
             <span class="exp-card__num">04</span>
             <div class="exp-card__body">
               <p class="exp-card__period">2021 — 2022</p>
-              <h3 class="exp-card__role">Intitulé du poste</h3>
+              <h2 class="exp-card__role">Intitulé du poste</h2>
               <p class="exp-card__company">Entreprise · Lieu</p>
             </div>
           </div>
@@ -431,7 +436,7 @@
             <span class="exp-card__num">05</span>
             <div class="exp-card__body">
               <p class="exp-card__period">2020 — 2021</p>
-              <h3 class="exp-card__role">Intitulé du poste</h3>
+              <h2 class="exp-card__role">Intitulé du poste</h2>
               <p class="exp-card__company">Entreprise · Lieu</p>
             </div>
           </div>

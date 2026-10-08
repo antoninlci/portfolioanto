@@ -26,11 +26,14 @@
     const edgeScale = 0.5;         // edge scale distance
     const edgeEase = gsap.parseEase("power2.inOut");
     const minScale = 1;            // smallest scale for distant cards
-    const backDarkness = 0.75;     // darkening applied to cards in back
+    const defaultBackDarkness = 0.75;  // darkening applied to cards in back
     const backBlur = 0.5;          // blur applied to cards in back
 
     containers.forEach((container) => {
       const list = container.querySelector('[data-3d-tornado-list]');
+      // Sur fond clair, assombrir les cartes du fond à 75 % les rend presque
+      // noires : la page peut demander moins via data-back-darkness.
+      const backDarkness = parseFloat(container.dataset.backDarkness) || defaultBackDarkness;
       const originalCards = gsap.utils.toArray('[data-3d-tornado-item]', list).map((card) => card.cloneNode(true));
       if (!list || !originalCards.length) return;
 
@@ -47,6 +50,7 @@
         em: 16,
         isActive: false,
         blockDrag: false,
+        hovering: false,
         cards: []
       };
 
@@ -123,7 +127,9 @@
 
       function tick() {
         if (!state.isActive) return;
-        const targetVelocity = autoSpeed * state.direction;
+        // Survoler une carte arrête la rotation : sinon elle glisse sous le
+        // curseur pendant qu'on vise.
+        const targetVelocity = state.hovering ? 0 : autoSpeed * state.direction;
         state.velocity = gsap.utils.interpolate(state.velocity, targetVelocity, scrollEase);
         state.progress += state.velocity;
         render();
@@ -161,11 +167,58 @@
         onChange: handleInput,
         onPress: (self) => {
           const t = self.event && self.event.target;
-          state.blockDrag = !!(t && t.closest && t.closest('[data-cursor-marquee-text]'));
+          // On ne fait tourner qu'en glissant hors des cartes : un appui sur
+          // une carte est un clic, jamais le début d'un glisser.
+          state.blockDrag = !!(t && t.closest && t.closest('[data-cursor-marquee-text], .exp-card'));
           if (!state.blockDrag) container.style.cursor = 'grabbing';
         },
         onRelease: () => { state.blockDrag = false; container.style.cursor = 'grab'; }
       });
+
+      // Clic sur une carte : un seul appui ouvre l'expérience. À la souris, on
+      // part dès l'appui — la carte tourne, et attendre le relâchement laisse
+      // le temps à une autre carte de passer dessous. Au doigt, on attend le
+      // relâchement pour ne pas ouvrir une carte quand on voulait balayer.
+      // Le clic natif qui suit est annulé (écouteur en capture sur window,
+      // donc avant celui de transition.js sur document), sinon on naviguerait
+      // deux fois. Cmd/Ctrl-clic garde le comportement normal du navigateur.
+      const tapSlop = 10;
+      let press = null;
+
+      function open(card) {
+        if (!card.matches('a[href]')) return;
+        opening = true;
+        card.click();   // passe par transition.js, comme un vrai lien
+        opening = false;
+      }
+      let opening = false;
+
+      container.addEventListener('pointerover', (e) => {
+        state.hovering = !!(e.target.closest && e.target.closest('.exp-card'));
+      });
+      container.addEventListener('pointerleave', () => { state.hovering = false; });
+
+      container.addEventListener('pointerdown', (e) => {
+        press = null;
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        const card = e.target.closest && e.target.closest('.exp-card');
+        if (!card) return;
+        if (e.pointerType === 'mouse') { open(card); return; }
+        press = { x: e.clientX, y: e.clientY, card };
+      });
+      window.addEventListener('pointerup', (e) => {
+        const p = press;
+        press = null;
+        if (e.pointerType !== 'mouse') state.hovering = false;
+        if (p && Math.hypot(e.clientX - p.x, e.clientY - p.y) <= tapSlop) open(p.card);
+      });
+      window.addEventListener('click', (e) => {
+        if (opening || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        if (e.target.closest && e.target.closest('.cards-tornado .exp-card')) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
 
       ScrollTrigger.create({
         trigger: container,
