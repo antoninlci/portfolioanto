@@ -901,6 +901,20 @@ ul, ol { list-style: none; }
   /* vertically centered by flex parent */
 }
 
+/* Le visuel et le titre de chaque panneau mènent au projet. Deux liens, et
+   non un seul autour de .work-panel-content : cette grille fait 100vw sur
+   100vh, et un lien de cette taille rendrait l'écran entier cliquable —
+   un clic n'importe où sortirait de la page. Les enfants portent déjà leur
+   couleur ; c'est le soulignement qu'il faut couper, il descendrait jusqu'au
+   h2. Les panneaux masqués le sont par clip-path, qui coupe aussi le clic :
+   un panneau invisible ne capte donc rien. */
+a.work-media-wrap,
+a.work-panel-info-main {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .work-panel-info-meta {
   position: absolute;
   bottom: 60px;
